@@ -3,27 +3,47 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9091AB7A2368736A00E43F37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091AB792368736A00E43F37 /* AppDelegate.swift */; };
-		9091AB7C2368736A00E43F37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091AB7B2368736A00E43F37 /* SceneDelegate.swift */; };
-		9091AB7E2368736A00E43F37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091AB7D2368736A00E43F37 /* ViewController.swift */; };
-		9091AB812368736A00E43F37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9091AB7F2368736A00E43F37 /* Main.storyboard */; };
-		9091AB832368736B00E43F37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9091AB822368736B00E43F37 /* Assets.xcassets */; };
-		9091AB862368736B00E43F37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9091AB842368736B00E43F37 /* LaunchScreen.storyboard */; };
+		28BFC04E79D4CCFC75F97FA1 /* Pods_snakePanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */; };
+		9091ABC5236873FF00E43F37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABC4236873FF00E43F37 /* AppDelegate.swift */; };
+		9091ABC72368740E00E43F37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9091ABC62368740E00E43F37 /* Assets.xcassets */; };
+		9091ABD32368742800E43F37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCB2368742800E43F37 /* ViewController.swift */; };
+		9091ABD42368742800E43F37 /* ScheduleWeekVerticalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCD2368742800E43F37 /* ScheduleWeekVerticalCell.swift */; };
+		9091ABD52368742800E43F37 /* ScheduleDayCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCE2368742800E43F37 /* ScheduleDayCollectionController.swift */; };
+		9091ABD62368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCF2368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift */; };
+		9091ABD72368742800E43F37 /* PinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABD02368742800E43F37 /* PinkViewController.swift */; };
+		9091ABD82368742800E43F37 /* PurpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABD12368742800E43F37 /* PurpleViewController.swift */; };
+		9091ABDE2368745100E43F37 /* HttpsScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABDB2368745100E43F37 /* HttpsScrapper.swift */; };
+		9091ABDF2368745100E43F37 /* HtmlScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABDC2368745100E43F37 /* HtmlScrapper.swift */; };
+		9091ABE02368745100E43F37 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABDD2368745100E43F37 /* Crypto.swift */; };
+		9091ABE62368746800E43F37 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABE22368746700E43F37 /* CoreDataStack.swift */; };
+		9091ABE82368746800E43F37 /* CoreDataStackFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */; };
+		909AC6F923687DD6006E3D76 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 909AC6F723687DD6006E3D76 /* CoreDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_snakePanic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4FD22EA3BCFB6C39CD8BB6F9 /* Pods-snakePanic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.debug.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.debug.xcconfig"; sourceTree = "<group>"; };
+		903F7D182368810200531EA4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9091AB762368736A00E43F37 /* snakePanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = snakePanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9091AB792368736A00E43F37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9091AB7B2368736A00E43F37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9091AB7D2368736A00E43F37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9091AB802368736A00E43F37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9091AB822368736B00E43F37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9091AB852368736B00E43F37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9091AB872368736B00E43F37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9091ABC4236873FF00E43F37 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9091ABC62368740E00E43F37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9091ABCB2368742800E43F37 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9091ABCD2368742800E43F37 /* ScheduleWeekVerticalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleWeekVerticalCell.swift; sourceTree = "<group>"; };
+		9091ABCE2368742800E43F37 /* ScheduleDayCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDayCollectionController.swift; sourceTree = "<group>"; };
+		9091ABCF2368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleWeekHorizontalCollectionView.swift; sourceTree = "<group>"; };
+		9091ABD02368742800E43F37 /* PinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinkViewController.swift; sourceTree = "<group>"; };
+		9091ABD12368742800E43F37 /* PurpleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurpleViewController.swift; sourceTree = "<group>"; };
+		9091ABDB2368745100E43F37 /* HttpsScrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpsScrapper.swift; sourceTree = "<group>"; };
+		9091ABDC2368745100E43F37 /* HtmlScrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlScrapper.swift; sourceTree = "<group>"; };
+		9091ABDD2368745100E43F37 /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		9091ABE22368746700E43F37 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackFetch.swift; sourceTree = "<group>"; };
+		909AC6F823687DD6006E3D76 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		D46392113E00EA40DBBA57F1 /* Pods-snakePanic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.release.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28BFC04E79D4CCFC75F97FA1 /* Pods_snakePanic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +63,8 @@
 			children = (
 				9091AB782368736A00E43F37 /* snakePanic */,
 				9091AB772368736A00E43F37 /* Products */,
+				DC4A2ACDF1B2383EA0F6B6F3 /* Pods */,
+				F2338A5C85C82B80ACC17EDF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +79,72 @@
 		9091AB782368736A00E43F37 /* snakePanic */ = {
 			isa = PBXGroup;
 			children = (
-				9091AB792368736A00E43F37 /* AppDelegate.swift */,
-				9091AB7B2368736A00E43F37 /* SceneDelegate.swift */,
-				9091AB7D2368736A00E43F37 /* ViewController.swift */,
-				9091AB7F2368736A00E43F37 /* Main.storyboard */,
-				9091AB822368736B00E43F37 /* Assets.xcassets */,
-				9091AB842368736B00E43F37 /* LaunchScreen.storyboard */,
-				9091AB872368736B00E43F37 /* Info.plist */,
+				903F7D182368810200531EA4 /* Info.plist */,
+				9091ABC4236873FF00E43F37 /* AppDelegate.swift */,
+				9091ABC62368740E00E43F37 /* Assets.xcassets */,
+				9091ABCA2368742800E43F37 /* View */,
+				9091ABE12368746700E43F37 /* CoreData */,
+				9091ABDA2368745100E43F37 /* Scrappers */,
 			);
 			path = snakePanic;
+			sourceTree = "<group>";
+		};
+		9091ABCA2368742800E43F37 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9091ABCB2368742800E43F37 /* ViewController.swift */,
+				9091ABCC2368742800E43F37 /* Schedule */,
+				9091ABD02368742800E43F37 /* PinkViewController.swift */,
+				9091ABD12368742800E43F37 /* PurpleViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9091ABCC2368742800E43F37 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				9091ABCD2368742800E43F37 /* ScheduleWeekVerticalCell.swift */,
+				9091ABCE2368742800E43F37 /* ScheduleDayCollectionController.swift */,
+				9091ABCF2368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		9091ABDA2368745100E43F37 /* Scrappers */ = {
+			isa = PBXGroup;
+			children = (
+				9091ABDB2368745100E43F37 /* HttpsScrapper.swift */,
+				9091ABDC2368745100E43F37 /* HtmlScrapper.swift */,
+				9091ABDD2368745100E43F37 /* Crypto.swift */,
+			);
+			path = Scrappers;
+			sourceTree = "<group>";
+		};
+		9091ABE12368746700E43F37 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9091ABE22368746700E43F37 /* CoreDataStack.swift */,
+				9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */,
+				909AC6F723687DD6006E3D76 /* CoreDataModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		DC4A2ACDF1B2383EA0F6B6F3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4FD22EA3BCFB6C39CD8BB6F9 /* Pods-snakePanic.debug.xcconfig */,
+				D46392113E00EA40DBBA57F1 /* Pods-snakePanic.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F2338A5C85C82B80ACC17EDF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +154,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9091AB8A2368736B00E43F37 /* Build configuration list for PBXNativeTarget "snakePanic" */;
 			buildPhases = (
+				3B0C2D4E8678F161150DCD37 /* [CP] Check Pods Manifest.lock */,
 				9091AB722368736A00E43F37 /* Sources */,
 				9091AB732368736A00E43F37 /* Frameworks */,
 				9091AB742368736A00E43F37 /* Resources */,
+				AAACFE8BB8F53394B6389528 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -99,6 +181,7 @@
 				TargetAttributes = {
 					9091AB752368736A00E43F37 = {
 						CreatedOnToolsVersion = 11.1;
+						LastSwiftMigration = 1110;
 					};
 				};
 			};
@@ -125,45 +208,76 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9091AB862368736B00E43F37 /* LaunchScreen.storyboard in Resources */,
-				9091AB832368736B00E43F37 /* Assets.xcassets in Resources */,
-				9091AB812368736A00E43F37 /* Main.storyboard in Resources */,
+				9091ABC72368740E00E43F37 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B0C2D4E8678F161150DCD37 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-snakePanic-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AAACFE8BB8F53394B6389528 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-snakePanic/Pods-snakePanic-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-snakePanic/Pods-snakePanic-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-snakePanic/Pods-snakePanic-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9091AB722368736A00E43F37 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9091AB7E2368736A00E43F37 /* ViewController.swift in Sources */,
-				9091AB7A2368736A00E43F37 /* AppDelegate.swift in Sources */,
-				9091AB7C2368736A00E43F37 /* SceneDelegate.swift in Sources */,
+				9091ABDF2368745100E43F37 /* HtmlScrapper.swift in Sources */,
+				9091ABD72368742800E43F37 /* PinkViewController.swift in Sources */,
+				9091ABD32368742800E43F37 /* ViewController.swift in Sources */,
+				909AC6F923687DD6006E3D76 /* CoreDataModel.xcdatamodeld in Sources */,
+				9091ABE62368746800E43F37 /* CoreDataStack.swift in Sources */,
+				9091ABDE2368745100E43F37 /* HttpsScrapper.swift in Sources */,
+				9091ABD82368742800E43F37 /* PurpleViewController.swift in Sources */,
+				9091ABC5236873FF00E43F37 /* AppDelegate.swift in Sources */,
+				9091ABE82368746800E43F37 /* CoreDataStackFetch.swift in Sources */,
+				9091ABD42368742800E43F37 /* ScheduleWeekVerticalCell.swift in Sources */,
+				9091ABD62368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift in Sources */,
+				9091ABE02368745100E43F37 /* Crypto.swift in Sources */,
+				9091ABD52368742800E43F37 /* ScheduleDayCollectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		9091AB7F2368736A00E43F37 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9091AB802368736A00E43F37 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		9091AB842368736B00E43F37 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9091AB852368736B00E43F37 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9091AB882368736B00E43F37 /* Debug */ = {
@@ -282,8 +396,10 @@
 		};
 		9091AB8B2368736B00E43F37 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FD22EA3BCFB6C39CD8BB6F9 /* Pods-snakePanic.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GW9JX6L683;
 				INFOPLIST_FILE = snakePanic/Info.plist;
@@ -293,6 +409,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikolajkaminski.snakePanic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -300,8 +417,10 @@
 		};
 		9091AB8C2368736B00E43F37 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D46392113E00EA40DBBA57F1 /* Pods-snakePanic.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GW9JX6L683;
 				INFOPLIST_FILE = snakePanic/Info.plist;
@@ -338,6 +457,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		909AC6F723687DD6006E3D76 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				909AC6F823687DD6006E3D76 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 909AC6F823687DD6006E3D76 /* CoreDataModel.xcdatamodel */;
+			path = CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9091AB6E2368736A00E43F37 /* Project object */;
 }
