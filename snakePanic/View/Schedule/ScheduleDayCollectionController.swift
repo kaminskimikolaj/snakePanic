@@ -21,7 +21,7 @@ class ScheduleDayCollectionController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        tabBarController?.viewControllers?[0].tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "Schedule"), tag: 0)
+        tabBarController?.viewControllers?[0].tabBarItem = UITabBarItem(title: "Schedule", image: UIImage(named: "Schedule"), tag: 0)
         tabBarController?.selectedIndex = 0
     }
     

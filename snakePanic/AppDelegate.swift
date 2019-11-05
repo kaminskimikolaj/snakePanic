@@ -23,16 +23,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         tabBarController.tabBar.tintColor = .systemTeal
         tabBarController.tabBar.barTintColor = .systemGroupedBackground
         
-//        let navigationController = UINavigationController(rootViewController: ScheduleDayCollectionController())
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        flowLayout.minimumInteritemSpacing = 5.0
-        let navigationController = UINavigationController(rootViewController: ScheduleWeekHorizontalCollectionView(collectionViewLayout: flowLayout))
+        let navigationController = UINavigationController(rootViewController: ScheduleDayCollectionController())
+//        let flowLayout = UICollectionViewFlowLayout()
+//        flowLayout.scrollDirection = .vertical
+//        flowLayout.minimumInteritemSpacing = 5.0
+//
+//        let navigationController = UINavigationController(rootViewController: ScheduleWeekHorizontalCollectionView(collectionViewLayout: flowLayout))
 
         navigationController.isNavigationBarHidden = true
         navigationController.tabBarItem = UITabBarItem(title: "Schedule", image: UIImage(named: "Schedule"), tag: 0)
         
         let pinkViewController = PinkViewController()
+//        let pinkViewController = TestViewController2()
         pinkViewController.tabBarItem = UITabBarItem(title: "Marks", image: UIImage(named: "Map"), tag: 1)
         
         tabBarController.viewControllers = [navigationController, pinkViewController]
@@ -44,6 +46,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(urls[urls.count-1] as URL)
         return true
     }
-
-
 }

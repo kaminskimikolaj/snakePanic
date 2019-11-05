@@ -52,6 +52,24 @@ extension ScheduleWeekVerticalCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         cell.backgroundColor = .systemGray5
+//        let label = UILabel(frame: cell.frame)
+//        label.text = "Historia i społeczeństow"
+//        label.numberOfLines = 2
+//        cell.addSubview(label)
+        
+        let label = UILabel(frame: .zero)
+        label.numberOfLines = 2
+//        label.allowsDefaultTighteningForTruncation = true
+        label.text = "Historia i społeczeństwo"
+//        label.lineBreakMode = .byWordWrapping
+        label.textColor = .black
+        label.adjustsFontSizeToFitWidth = true
+        label.textAlignment = .center
+        cell.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.topAnchor.constraint(equalTo: cell.topAnchor).isActive = true
+        label.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
+        label.widthAnchor.constraint(equalTo: cell.widthAnchor).isActive = true
         return cell
     }
 }
@@ -61,3 +79,5 @@ extension ScheduleWeekVerticalCell: UICollectionViewDelegateFlowLayout {
         return CGSize(width: self.frame.width, height: self.frame.height / 10 - 5 * (10 - 1) / 10)
     }
 }
+
+

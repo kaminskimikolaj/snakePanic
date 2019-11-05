@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		28BFC04E79D4CCFC75F97FA1 /* Pods_snakePanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */; };
+		9075C9FA2369BD5500ADEC27 /* ScheduleWeekTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075C9F92369BD5500ADEC27 /* ScheduleWeekTest.swift */; };
+		9075C9FC2369C58A00ADEC27 /* TestViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075C9FB2369C58A00ADEC27 /* TestViewController2.swift */; };
 		9091ABC5236873FF00E43F37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABC4236873FF00E43F37 /* AppDelegate.swift */; };
 		9091ABC72368740E00E43F37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9091ABC62368740E00E43F37 /* Assets.xcassets */; };
 		9091ABD32368742800E43F37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCB2368742800E43F37 /* ViewController.swift */; };
@@ -28,6 +30,8 @@
 		38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_snakePanic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD22EA3BCFB6C39CD8BB6F9 /* Pods-snakePanic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.debug.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.debug.xcconfig"; sourceTree = "<group>"; };
 		903F7D182368810200531EA4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9075C9F92369BD5500ADEC27 /* ScheduleWeekTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekTest.swift; sourceTree = "<group>"; };
+		9075C9FB2369C58A00ADEC27 /* TestViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController2.swift; sourceTree = "<group>"; };
 		9091AB762368736A00E43F37 /* snakePanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = snakePanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9091ABC4236873FF00E43F37 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9091ABC62368740E00E43F37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,9 +107,11 @@
 		9091ABCC2368742800E43F37 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				9091ABCD2368742800E43F37 /* ScheduleWeekVerticalCell.swift */,
 				9091ABCE2368742800E43F37 /* ScheduleDayCollectionController.swift */,
 				9091ABCF2368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift */,
+				9091ABCD2368742800E43F37 /* ScheduleWeekVerticalCell.swift */,
+				9075C9F92369BD5500ADEC27 /* ScheduleWeekTest.swift */,
+				9075C9FB2369C58A00ADEC27 /* TestViewController2.swift */,
 			);
 			path = Schedule;
 			sourceTree = "<group>";
@@ -267,8 +273,10 @@
 				909AC6F923687DD6006E3D76 /* CoreDataModel.xcdatamodeld in Sources */,
 				9091ABE62368746800E43F37 /* CoreDataStack.swift in Sources */,
 				9091ABDE2368745100E43F37 /* HttpsScrapper.swift in Sources */,
+				9075C9FC2369C58A00ADEC27 /* TestViewController2.swift in Sources */,
 				9091ABD82368742800E43F37 /* PurpleViewController.swift in Sources */,
 				9091ABC5236873FF00E43F37 /* AppDelegate.swift in Sources */,
+				9075C9FA2369BD5500ADEC27 /* ScheduleWeekTest.swift in Sources */,
 				9091ABE82368746800E43F37 /* CoreDataStackFetch.swift in Sources */,
 				9091ABD42368742800E43F37 /* ScheduleWeekVerticalCell.swift in Sources */,
 				9091ABD62368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift in Sources */,

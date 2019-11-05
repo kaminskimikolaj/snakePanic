@@ -14,7 +14,41 @@ class ScheduleWeekHorizontalCollectionView: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         self.collectionView!.register(ScheduleWeekVerticalCell.self, forCellWithReuseIdentifier: ScheduleWeekVerticalCell.identifier)
+            registerSwipeGestures()
+            
+    }
+    var lastSelected: Int = 0
+    var selected: Int = 0 {
+        didSet {
+            lastSelected = self.selected
+            collectionView.reloadItems(at: [IndexPath(row: lastSelected, section: 0), IndexPath(row: self.selected, section: 0)])
+            print("selected index \(selected)")
+        }
+    }
+    
+    func registerSwipeGestures() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+    }
+    
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == .right {
+            if selected > 0 {
+                selected -= 1
+            }
+        }
+        else if gesture.direction == .left {
+            if selected < 4 {
+                selected += 1
+            }
+        }
     }
 }
 
@@ -24,8 +58,11 @@ extension ScheduleWeekHorizontalCollectionView {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleWeekVerticalCell.identifier, for: indexPath)
-
+//        return collectionView.dequeueReusableCell(withReuseIdentifier: ScheduleWeekVerticalCell.identifier, for: indexPath)
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        cell.backgroundColor = .systemTeal
+        return cell
 //        switch indexPath.row {
 //        case 0:
 //            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
@@ -72,7 +109,13 @@ extension ScheduleWeekHorizontalCollectionView {
 extension ScheduleWeekHorizontalCollectionView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size = view.safeAreaLayoutGuide.layoutFrame.size
-        size.width = (size.width / 5) - 4.0
+//        print(size)
+        size.width = size.width / 5
+//        if indexPath.row == selected {
+//            size.width = size.width * 2
+//        }
+        size.width -= 4.0
+//        print(size.width)
         return size
     }
 }
