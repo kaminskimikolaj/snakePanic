@@ -128,8 +128,8 @@ class ScheduleView: UIViewController {
             if selected == i {
                 self.horizontalRowsWidths[i].superWidth.isActive = false
                 self.horizontalRowsWidths[i].featuredWidth.isActive = true
-                self.horizontalRowsHeights[i].dayHeight.isActive = false
-                self.horizontalRowsHeights[i].weekHeight.isActive = true
+//                self.horizontalRowsHeights[i].dayHeight.isActive = false
+//                self.horizontalRowsHeights[i].weekHeight.isActive = true
             } else {
                 self.horizontalRowsWidths[i].zeroWidth.isActive = false
                 self.horizontalRowsWidths[i].standardWidth.isActive = true
@@ -140,7 +140,7 @@ class ScheduleView: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: { _ in
             self.horizontalRows[self.selected].isSuperWidthed = false
-            print(self.horizontalRows[self.selected].frame.height)
+//            print(self.horizontalRows[self.selected].frame.height)
         })
     }
     
@@ -151,8 +151,8 @@ class ScheduleView: UIViewController {
             if selected == i {
                 self.horizontalRowsWidths[i].featuredWidth.isActive = false
                 self.horizontalRowsWidths[i].superWidth.isActive = true
-                self.horizontalRowsHeights[i].weekHeight.isActive = false
-                self.horizontalRowsHeights[i].dayHeight.isActive = true
+//                self.horizontalRowsHeights[i].weekHeight.isActive = false
+//                self.horizontalRowsHeights[i].dayHeight.isActive = true
             } else {
                 self.horizontalRowsWidths[i].standardWidth.isActive = false
                 self.horizontalRowsWidths[i].zeroWidth.isActive = true
@@ -164,7 +164,8 @@ class ScheduleView: UIViewController {
             self.doubleTap.numberOfTapsRequired = 2
             self.gestureTarget.addGestureRecognizer(self.doubleTap)
             self.horizontalRows[self.selected].isSuperWidthed = true
-            print(self.horizontalRows[self.selected].frame.height)
+            self.horizontalRows[self.selected].contentSize = CGSize(width: self.horizontalRows[self.selected].frame.width, height: self.horizontalRows[self.selected].frame.height * 2)
+//            print(self.horizontalRows[self.selected].frame.height)
         })
     }
     
@@ -183,7 +184,7 @@ class ScheduleView: UIViewController {
     }
 }
 
-class HorizontalRow: UIView {
+class HorizontalRow: UIScrollView {
     
     var cells = [UIView]()
     var cellsConstraints = [CellHeight]()
@@ -219,10 +220,11 @@ class HorizontalRow: UIView {
     private func setupView() {
         layer.cornerRadius = 5
         backgroundColor = .systemGray6
-//        isScrollEnabled = true
-//        showsHorizontalScrollIndicator = false
-//        showsVerticalScrollIndicator = true
-//        contentSize = CGSize(width: 320, height: 1500)
+        print(frame)
+        isScrollEnabled = true
+        showsHorizontalScrollIndicator = true
+        showsVerticalScrollIndicator = true
+//        contentSize = CGSize(width: frame.width, height: frame.height)
         for i in 0...9 {
             let cell = UIView(frame: .zero)
             addSubview(cell)

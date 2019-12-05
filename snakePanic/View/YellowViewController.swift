@@ -21,7 +21,7 @@ class YellowViewController: UIViewController {
         scroll.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             scroll.topAnchor.constraint(equalTo: view.topAnchor),
-            scroll.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 2),
+            scroll.heightAnchor.constraint(equalTo: view.heightAnchor),
             scroll.widthAnchor.constraint(equalTo: view.widthAnchor)
         ])
         let box = UIView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
