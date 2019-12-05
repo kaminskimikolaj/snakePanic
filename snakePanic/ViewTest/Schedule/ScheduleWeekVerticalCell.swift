@@ -21,7 +21,7 @@ class ScheduleWeekVerticalCell: UICollectionViewCell {
     
     func setupViews() {
         addSubview(collectionView)
-        collectionView.delegate = self
+//        collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true;
         collectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true;
@@ -74,10 +74,11 @@ extension ScheduleWeekVerticalCell: UICollectionViewDataSource {
     }
 }
 
-extension ScheduleWeekVerticalCell: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: self.frame.height / 10 - 5 * (10 - 1) / 10)
-    }
-}
+//extension ScheduleWeekVerticalCell: UICollectionViewDelegateFlowLayout {
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let size = CGSize(width: self.frame.width, height: self.frame.height / 10 - 5 * (10 - 1) / 10)
+//        return size
+//    }
+//}
 
 

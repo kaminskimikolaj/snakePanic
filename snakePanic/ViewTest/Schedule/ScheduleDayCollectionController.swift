@@ -19,11 +19,11 @@ class ScheduleDayCollectionController: UIViewController {
         case fetchingError
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        tabBarController?.viewControllers?[0].tabBarItem = UITabBarItem(title: "Schedule", image: UIImage(named: "Schedule"), tag: 0)
-        tabBarController?.selectedIndex = 0
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(true)
+//        tabBarController?.viewControllers?[0].tabBarItem = UITabBarItem(title: "Schedule", image: UIImage(named: "Schedule"), tag: 0)
+//        tabBarController?.selectedIndex = 0
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,6 +180,7 @@ class TestContentCell: UICollectionViewCell {
         label.textColor = .label
         label.textAlignment = .center
         label.font = label.font.withSize(25.0)
+//        label.font = UIFont.
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.topAnchor.constraint(equalTo: topAnchor).isActive = true

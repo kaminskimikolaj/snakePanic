@@ -13,8 +13,8 @@ class PinkViewController: UIViewController {
         
         let path = UIBezierPath()
         let cellWidth = view.frame.width
-        let cellHeight = CGFloat(200.0)
-        let margin = cellWidth / 15
+        let cellHeight = CGFloat(100.0)
+        let margin = CGFloat(15.0)
         let cornerSize = margin * 2
         let start = CGPoint(x: margin, y: cornerSize)
         
@@ -44,13 +44,38 @@ class PinkViewController: UIViewController {
         
         let subview = UIView(frame: .zero)
 //        subview.backgroundColor = .systemTeal
+        
         view.addSubview(subview)
         subview.translatesAutoresizingMaskIntoConstraints = false
         subview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         subview.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
         subview.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        subview.heightAnchor.constraint(equalToConstant: 230.0).isActive = true
+        subview.heightAnchor.constraint(equalToConstant: 130.0).isActive = true
         subview.layer.addSublayer(layer)
         subview.layer.addSublayer(shadowLayer)
+        
+        
+        
+        let text = UILabel(frame: .zero)
+        text.text = "Matematyka"
+        text.textAlignment = .center
+        
+//        for family in UIFont.familyNames.sorted() {
+//            let names = UIFont.fontNames(forFamilyName: family)
+//            print("Family: \(family) Font names: \(names)")
+//        }
+        
+        guard let customFont = UIFont(name: "AndaleMono", size: UIFont.labelFontSize) else { fatalError("Failed importing font") }
+        text.font = UIFontMetrics.default.scaledFont(for: customFont)
+//        text.backgroundColor = UIColor.systemPurple.withAlphaComponent(0.5)
+        subview.addSubview(text)
+        text.translatesAutoresizingMaskIntoConstraints = false
+        text.topAnchor.constraint(equalTo: subview.topAnchor, constant: 30.0).isActive = true
+        text.bottomAnchor.constraint(equalTo: subview.bottomAnchor, constant: -60.0).isActive = true
+        text.rightAnchor.constraint(equalTo: subview.rightAnchor, constant: -30.0).isActive = true
+        text.leftAnchor.constraint(equalTo: subview.leftAnchor, constant: 30.0).isActive = true
+        text.font = text.font.withSize(100.0)
+        text.adjustsFontSizeToFitWidth = true
+        text.numberOfLines = 0
     }
 }

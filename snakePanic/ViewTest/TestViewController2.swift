@@ -4,28 +4,42 @@ class TestViewController2: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let subview = UIView(frame: view.safeAreaLayoutGuide.layoutFrame)
-        subview.backgroundColor = .systemPink
-        view.addSubview(subview)
-        
+        setupView()
+        setupScroll()
+    }
+    
+    func setupView() {
+        let background = UIView(frame: view.safeAreaLayoutGuide.layoutFrame)
+        background.backgroundColor = .systemGreen
+        view.addSubview(background)
+    }
+    
+    func setupScroll() {
         let scroll = UIScrollView(frame: .zero)
         view.addSubview(scroll)
         scroll.translatesAutoresizingMaskIntoConstraints = false
         scroll.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scroll.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor).isActive = true
         scroll.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        
-        
         scroll.contentSize = CGSize(width: view.frame.width * 2 - 1, height: scroll.frame.height)
-//        scroll.backgroundColor = .systemTeal
-        
         scroll.bounces = false
         scroll.delegate = self
-        scroll.showsHorizontalScrollIndicator = false
+        scroll.showsHorizontalScrollIndicator = true
         
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tap(sender:)))
+        tap.numberOfTapsRequired = 1
+        scroll.addGestureRecognizer(tap)
     }
     
+    @objc func tap(sender:UITapGestureRecognizer){
+
+        if sender.state == .ended {
+
+            var touchLocation: CGPoint = sender.location(in: sender.view)
+            print(touchLocation)
+
+        }
+    }
     var selected: Int = 0 {
         didSet {
             print("selected \(self.selected)")
