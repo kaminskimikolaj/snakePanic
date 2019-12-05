@@ -8,55 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		28BFC04E79D4CCFC75F97FA1 /* Pods_snakePanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */; };
-		904675932375D0E2002CFA7C /* CustomFont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 904675922375D0DE002CFA7C /* CustomFont.ttf */; };
-		905BBB65238CD0E0008D9F7B /* OrangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905BBB64238CD0E0008D9F7B /* OrangeViewController.swift */; };
-		9070F3B2238CC5A200EF210C /* ScheduleWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9070F3B1238CC5A200EF210C /* ScheduleWeekView.swift */; };
+		905E936F239905C200554A54 /* YellowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E936E239905C200554A54 /* YellowViewController.swift */; };
 		90743246239476B700DD75F7 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90743245239476B700DD75F7 /* TabBarController.swift */; };
-		9075C9FA2369BD5500ADEC27 /* ScheduleWeekTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075C9F92369BD5500ADEC27 /* ScheduleWeekTest.swift */; };
-		9075C9FC2369C58A00ADEC27 /* TestViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9075C9FB2369C58A00ADEC27 /* TestViewController2.swift */; };
 		9091ABC5236873FF00E43F37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABC4236873FF00E43F37 /* AppDelegate.swift */; };
 		9091ABC72368740E00E43F37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9091ABC62368740E00E43F37 /* Assets.xcassets */; };
-		9091ABD32368742800E43F37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCB2368742800E43F37 /* ViewController.swift */; };
-		9091ABD42368742800E43F37 /* ScheduleWeekVerticalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCD2368742800E43F37 /* ScheduleWeekVerticalCell.swift */; };
-		9091ABD52368742800E43F37 /* ScheduleDayCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCE2368742800E43F37 /* ScheduleDayCollectionController.swift */; };
-		9091ABD62368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABCF2368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift */; };
-		9091ABD72368742800E43F37 /* PinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABD02368742800E43F37 /* PinkViewController.swift */; };
-		9091ABD82368742800E43F37 /* PurpleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABD12368742800E43F37 /* PurpleViewController.swift */; };
 		9091ABDE2368745100E43F37 /* HttpsScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABDB2368745100E43F37 /* HttpsScrapper.swift */; };
 		9091ABDF2368745100E43F37 /* HtmlScrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABDC2368745100E43F37 /* HtmlScrapper.swift */; };
 		9091ABE02368745100E43F37 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABDD2368745100E43F37 /* Crypto.swift */; };
 		9091ABE62368746800E43F37 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABE22368746700E43F37 /* CoreDataStack.swift */; };
 		9091ABE82368746800E43F37 /* CoreDataStackFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */; };
 		909AC6F923687DD6006E3D76 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 909AC6F723687DD6006E3D76 /* CoreDataModel.xcdatamodeld */; };
-		90B79E1A2398E04000237C33 /* WithoutScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B79E192398E04000237C33 /* WithoutScrollViewController.swift */; };
+		90B79E1A2398E04000237C33 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B79E192398E04000237C33 /* ScheduleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_snakePanic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD22EA3BCFB6C39CD8BB6F9 /* Pods-snakePanic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.debug.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.debug.xcconfig"; sourceTree = "<group>"; };
 		903F7D182368810200531EA4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		904675922375D0DE002CFA7C /* CustomFont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CustomFont.ttf; sourceTree = "<group>"; };
-		905BBB64238CD0E0008D9F7B /* OrangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrangeViewController.swift; sourceTree = "<group>"; };
-		9070F3B1238CC5A200EF210C /* ScheduleWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekView.swift; sourceTree = "<group>"; };
+		905E936E239905C200554A54 /* YellowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowViewController.swift; sourceTree = "<group>"; };
 		90743245239476B700DD75F7 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		9075C9F92369BD5500ADEC27 /* ScheduleWeekTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekTest.swift; sourceTree = "<group>"; };
-		9075C9FB2369C58A00ADEC27 /* TestViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController2.swift; sourceTree = "<group>"; };
 		9091AB762368736A00E43F37 /* snakePanic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = snakePanic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9091ABC4236873FF00E43F37 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9091ABC62368740E00E43F37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		9091ABCB2368742800E43F37 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9091ABCD2368742800E43F37 /* ScheduleWeekVerticalCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleWeekVerticalCell.swift; sourceTree = "<group>"; };
-		9091ABCE2368742800E43F37 /* ScheduleDayCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleDayCollectionController.swift; sourceTree = "<group>"; };
-		9091ABCF2368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleWeekHorizontalCollectionView.swift; sourceTree = "<group>"; };
-		9091ABD02368742800E43F37 /* PinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinkViewController.swift; sourceTree = "<group>"; };
-		9091ABD12368742800E43F37 /* PurpleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PurpleViewController.swift; sourceTree = "<group>"; };
 		9091ABDB2368745100E43F37 /* HttpsScrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpsScrapper.swift; sourceTree = "<group>"; };
 		9091ABDC2368745100E43F37 /* HtmlScrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlScrapper.swift; sourceTree = "<group>"; };
 		9091ABDD2368745100E43F37 /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		9091ABE22368746700E43F37 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackFetch.swift; sourceTree = "<group>"; };
 		909AC6F823687DD6006E3D76 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		90B79E192398E04000237C33 /* WithoutScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithoutScrollViewController.swift; sourceTree = "<group>"; };
+		90B79E192398E04000237C33 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 		D46392113E00EA40DBBA57F1 /* Pods-snakePanic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.release.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -72,21 +52,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		904675912375D0D2002CFA7C /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				904675922375D0DE002CFA7C /* CustomFont.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		9070F3B0238CC58B00EF210C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9070F3B1238CC5A200EF210C /* ScheduleWeekView.swift */,
-				905BBB64238CD0E0008D9F7B /* OrangeViewController.swift */,
 				90743245239476B700DD75F7 /* TabBarController.swift */,
-				90B79E192398E04000237C33 /* WithoutScrollViewController.swift */,
+				90B79E192398E04000237C33 /* ScheduleView.swift */,
+				905E936E239905C200554A54 /* YellowViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -112,39 +83,14 @@
 		9091AB782368736A00E43F37 /* snakePanic */ = {
 			isa = PBXGroup;
 			children = (
-				9070F3B0238CC58B00EF210C /* View */,
-				904675912375D0D2002CFA7C /* Fonts */,
 				903F7D182368810200531EA4 /* Info.plist */,
 				9091ABC4236873FF00E43F37 /* AppDelegate.swift */,
 				9091ABC62368740E00E43F37 /* Assets.xcassets */,
-				9091ABCA2368742800E43F37 /* ViewTest */,
-				9091ABE12368746700E43F37 /* CoreData */,
+				9070F3B0238CC58B00EF210C /* View */,
 				9091ABDA2368745100E43F37 /* Scrappers */,
+				9091ABE12368746700E43F37 /* CoreData */,
 			);
 			path = snakePanic;
-			sourceTree = "<group>";
-		};
-		9091ABCA2368742800E43F37 /* ViewTest */ = {
-			isa = PBXGroup;
-			children = (
-				9075C9FB2369C58A00ADEC27 /* TestViewController2.swift */,
-				9091ABCB2368742800E43F37 /* ViewController.swift */,
-				9091ABCC2368742800E43F37 /* Schedule */,
-				9091ABD02368742800E43F37 /* PinkViewController.swift */,
-				9091ABD12368742800E43F37 /* PurpleViewController.swift */,
-			);
-			path = ViewTest;
-			sourceTree = "<group>";
-		};
-		9091ABCC2368742800E43F37 /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-				9091ABCE2368742800E43F37 /* ScheduleDayCollectionController.swift */,
-				9091ABCF2368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift */,
-				9091ABCD2368742800E43F37 /* ScheduleWeekVerticalCell.swift */,
-				9075C9F92369BD5500ADEC27 /* ScheduleWeekTest.swift */,
-			);
-			path = Schedule;
 			sourceTree = "<group>";
 		};
 		9091ABDA2368745100E43F37 /* Scrappers */ = {
@@ -246,7 +192,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9091ABC72368740E00E43F37 /* Assets.xcassets in Resources */,
-				904675932375D0E2002CFA7C /* CustomFont.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,24 +245,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				9091ABDF2368745100E43F37 /* HtmlScrapper.swift in Sources */,
-				90B79E1A2398E04000237C33 /* WithoutScrollViewController.swift in Sources */,
-				9091ABD72368742800E43F37 /* PinkViewController.swift in Sources */,
-				9091ABD32368742800E43F37 /* ViewController.swift in Sources */,
+				90B79E1A2398E04000237C33 /* ScheduleView.swift in Sources */,
 				909AC6F923687DD6006E3D76 /* CoreDataModel.xcdatamodeld in Sources */,
 				9091ABE62368746800E43F37 /* CoreDataStack.swift in Sources */,
-				9070F3B2238CC5A200EF210C /* ScheduleWeekView.swift in Sources */,
+				905E936F239905C200554A54 /* YellowViewController.swift in Sources */,
 				9091ABDE2368745100E43F37 /* HttpsScrapper.swift in Sources */,
-				9075C9FC2369C58A00ADEC27 /* TestViewController2.swift in Sources */,
-				9091ABD82368742800E43F37 /* PurpleViewController.swift in Sources */,
-				905BBB65238CD0E0008D9F7B /* OrangeViewController.swift in Sources */,
 				9091ABC5236873FF00E43F37 /* AppDelegate.swift in Sources */,
-				9075C9FA2369BD5500ADEC27 /* ScheduleWeekTest.swift in Sources */,
 				9091ABE82368746800E43F37 /* CoreDataStackFetch.swift in Sources */,
 				90743246239476B700DD75F7 /* TabBarController.swift in Sources */,
-				9091ABD42368742800E43F37 /* ScheduleWeekVerticalCell.swift in Sources */,
-				9091ABD62368742800E43F37 /* ScheduleWeekHorizontalCollectionView.swift in Sources */,
 				9091ABE02368745100E43F37 /* Crypto.swift in Sources */,
-				9091ABD52368742800E43F37 /* ScheduleDayCollectionController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
