@@ -30,9 +30,9 @@ class ScheduleView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
         view.backgroundColor = .systemGray6
         view.addSubview(gestureTarget)
-//        setupViews()
         gestureTarget.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             gestureTarget.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
@@ -106,6 +106,7 @@ class ScheduleView: UIViewController {
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
         let location = sender.location(in: self.gestureTarget).x
+//        let location = sender.location(in: self.view).x
         for i in 0...4 {
             if self.horizontalRows[i].frame.minX < location && self.horizontalRows[i].frame.maxX > location {
                 if selected == i {
@@ -182,7 +183,7 @@ class ScheduleView: UIViewController {
     }
 }
 
-class HorizontalRow: UIScrollView {
+class HorizontalRow: UIView {
     
     var cells = [UIView]()
     var cellsConstraints = [CellHeight]()
@@ -218,9 +219,10 @@ class HorizontalRow: UIScrollView {
     private func setupView() {
         layer.cornerRadius = 5
         backgroundColor = .systemGray6
-        isScrollEnabled = true
-        showsHorizontalScrollIndicator = true
-        showsVerticalScrollIndicator = false
+//        isScrollEnabled = true
+//        showsHorizontalScrollIndicator = false
+//        showsVerticalScrollIndicator = true
+//        contentSize = CGSize(width: 320, height: 1500)
         for i in 0...9 {
             let cell = UIView(frame: .zero)
             addSubview(cell)
