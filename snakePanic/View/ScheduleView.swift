@@ -13,7 +13,7 @@ class ScheduleView: UIViewController {
     let gestureTarget = UIView(frame: .zero)
     var horizontalRows = [HorizontalRow]()
     var horizontalRowsWidths = [HorizontalRowWidth]()
-    var horizontalRowsHeights = [HorizontalRowHeight]()
+//    var horizontalRowsHeights = [HorizontalRowHeight]()
     
     struct HorizontalRowWidth {
         let standardWidth: NSLayoutConstraint
@@ -22,10 +22,10 @@ class ScheduleView: UIViewController {
         let zeroWidth: NSLayoutConstraint
     }
     
-    struct HorizontalRowHeight {
-        let weekHeight: NSLayoutConstraint
-        let dayHeight: NSLayoutConstraint
-    }
+//    struct HorizontalRowHeight {
+//        let weekHeight: NSLayoutConstraint
+//        let dayHeight: NSLayoutConstraint
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,18 +54,18 @@ class ScheduleView: UIViewController {
             view.addSubview(horizontalRow)
             horizontalRow.translatesAutoresizingMaskIntoConstraints = false
             horizontalRow.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//            horizontalRow.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            horizontalRow.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             if i == 0 {
                 horizontalRow.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
             } else {
                 horizontalRow.leftAnchor.constraint(equalTo: horizontalRows[i - 1].rightAnchor).isActive = true
             }
-            let heights = HorizontalRowHeight(
-                weekHeight: horizontalRow.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
-                dayHeight: horizontalRow.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 2)
-            )
-            heights.weekHeight.isActive = true
-            horizontalRowsHeights.append(heights)
+//            let heights = HorizontalRowHeight(
+//                weekHeight: horizontalRow.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor),
+//                dayHeight: horizontalRow.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 2)
+//            )
+//            heights.weekHeight.isActive = true
+//            horizontalRowsHeights.append(heights)
             
             let widths = HorizontalRowWidth(standardWidth: horizontalRow.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 2/11), featuredWidth: horizontalRow.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/11), superWidth: horizontalRow.widthAnchor.constraint(equalTo: view.widthAnchor), zeroWidth: horizontalRow.widthAnchor.constraint(equalToConstant: 0.0))
             
@@ -106,7 +106,6 @@ class ScheduleView: UIViewController {
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
         let location = sender.location(in: self.gestureTarget).x
-//        let location = sender.location(in: self.view).x
         for i in 0...4 {
             if self.horizontalRows[i].frame.minX < location && self.horizontalRows[i].frame.maxX > location {
                 if selected == i {
@@ -128,31 +127,26 @@ class ScheduleView: UIViewController {
             if selected == i {
                 self.horizontalRowsWidths[i].superWidth.isActive = false
                 self.horizontalRowsWidths[i].featuredWidth.isActive = true
-//                self.horizontalRowsHeights[i].dayHeight.isActive = false
-//                self.horizontalRowsHeights[i].weekHeight.isActive = true
             } else {
                 self.horizontalRowsWidths[i].zeroWidth.isActive = false
                 self.horizontalRowsWidths[i].standardWidth.isActive = true
             }
         }
-//        self.horizontalRows[selected].isSuperWidthed = false
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
         }, completion: { _ in
-            self.horizontalRows[self.selected].isSuperWidthed = false
-//            print(self.horizontalRows[self.selected].frame.height)
+            
         })
     }
     
     lazy var doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.handlDoubleTap(sender:)))
     
     func superWidth() {
+        print(self.horizontalRows[selected].contentSize)
         for i in 0...4 {
             if selected == i {
                 self.horizontalRowsWidths[i].featuredWidth.isActive = false
                 self.horizontalRowsWidths[i].superWidth.isActive = true
-//                self.horizontalRowsHeights[i].weekHeight.isActive = false
-//                self.horizontalRowsHeights[i].dayHeight.isActive = true
             } else {
                 self.horizontalRowsWidths[i].standardWidth.isActive = false
                 self.horizontalRowsWidths[i].zeroWidth.isActive = true
@@ -163,9 +157,6 @@ class ScheduleView: UIViewController {
         }, completion: { _ in
             self.doubleTap.numberOfTapsRequired = 2
             self.gestureTarget.addGestureRecognizer(self.doubleTap)
-            self.horizontalRows[self.selected].isSuperWidthed = true
-            self.horizontalRows[self.selected].contentSize = CGSize(width: self.horizontalRows[self.selected].frame.width, height: self.horizontalRows[self.selected].frame.height * 2)
-//            print(self.horizontalRows[self.selected].frame.height)
         })
     }
     
@@ -186,26 +177,9 @@ class ScheduleView: UIViewController {
 
 class HorizontalRow: UIScrollView {
     
+    let contentView = UIView(frame: .zero)
     var cells = [UIView]()
     var cellsConstraints = [CellHeight]()
-    var isSuperWidthed: Bool = false {
-        didSet {
-            if self.isSuperWidthed {
-                for constraint in cellsConstraints {
-//                    constraint.weekHeight.isActive = false
-//                    constraint.dayHeight.isActive = true
-                }
-            } else {
-                for constraint in cellsConstraints {
-//                    constraint.dayHeight.isActive = false
-//                    constraint.weekHeight.isActive = true
-                }
-            }
-            UIView.animate(withDuration: 0.25, animations: {
-                self.layoutIfNeeded()
-            })
-        }
-    }
     
     struct CellHeight {
         let weekHeight: NSLayoutConstraint
@@ -220,11 +194,8 @@ class HorizontalRow: UIScrollView {
     private func setupView() {
         layer.cornerRadius = 5
         backgroundColor = .systemGray6
-        print(frame)
+        contentSize = CGSize(width: 320, height: 1000)
         isScrollEnabled = true
-        showsHorizontalScrollIndicator = true
-        showsVerticalScrollIndicator = true
-//        contentSize = CGSize(width: frame.width, height: frame.height)
         for i in 0...9 {
             let cell = UIView(frame: .zero)
             addSubview(cell)
@@ -242,12 +213,12 @@ class HorizontalRow: UIScrollView {
             let heights = CellHeight(
                 weekHeight: cell.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/10),
                 dayHeight: cell.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/5))
-            if isSuperWidthed {
-                heights.dayHeight.isActive = true
-                print("didn't believe that'd be ever called")
-            } else {
+//            if isSuperWidthed {
+//                heights.dayHeight.isActive = true
+//                print("didn't believe that'd be ever called")
+//            } else {
                 heights.weekHeight.isActive = true
-            }
+//            }
             self.cellsConstraints.append(heights)
             
             
