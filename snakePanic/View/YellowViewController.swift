@@ -53,7 +53,7 @@ class YellowViewController: UIViewController {
 //    }
 
     let setup: UILabel = {
-        let label = UILabel()
+        let label = UILabel(frame: .zero)
 //        label.text = "Scroll Bottom"
 //        label.backgroundColor = .green
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,7 @@ class YellowViewController: UIViewController {
     }()
 
     let scrollView: UIScrollView = {
-        let v = UIScrollView()
+        let v = UIScrollView(frame: .zero)
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = .systemOrange
         return v
@@ -75,6 +75,7 @@ class YellowViewController: UIViewController {
         scrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+//        scrollView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
         scrollView.addSubview(setup)
@@ -85,16 +86,16 @@ class YellowViewController: UIViewController {
         setup.rightAnchor.constraint(equalTo: scrollView.rightAnchor).isActive = true
         setup.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         
-        let subview = UIView(frame: .zero)
-        subview.backgroundColor = .systemTeal
-        scrollView.addSubview(subview)
-        subview.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            subview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            subview.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 2),
-            subview.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            subview.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
-        ])
+//        let subview = UIView(frame: .zero)
+//        subview.backgroundColor = .systemTeal
+//        scrollView.addSubview(subview)
+//        subview.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            subview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            subview.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 2),
+//            subview.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
+//            subview.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor)
+//        ])
     }
 
 }
