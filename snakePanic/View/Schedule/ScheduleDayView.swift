@@ -7,10 +7,28 @@ class ScheduleDayView: UIScrollView {
     var setupTopAnchorConstraintsForWeekView = NSLayoutConstraint()
     var setupTopAnchorConstraintsForDayView = NSLayoutConstraint()
     var cellsConstraints = [CellHeight]()
+    
+    var lastSelected = 0
+    var selected: Int = 0 {
+        didSet {
+            cellsConstraints[self.lastSelected].dayFeaturedHeight.isActive = false
+            cellsConstraints[self.lastSelected].dayStandardHeight.isActive = true
+
+            cellsConstraints[self.selected].dayStandardHeight.isActive = false
+            cellsConstraints[self.selected].dayFeaturedHeight.isActive = true
+            
+            lastSelected = self.selected
+            
+            UIView.animate(withDuration: 0.25, animations: {
+                self.layoutIfNeeded()
+            })
+        }
+    }
 
     struct CellHeight {
         let weekHeight: NSLayoutConstraint
-        let dayHeight: NSLayoutConstraint
+        let dayStandardHeight: NSLayoutConstraint
+        let dayFeaturedHeight: NSLayoutConstraint
     }
     
     override init(frame: CGRect) {
@@ -23,10 +41,17 @@ class ScheduleDayView: UIScrollView {
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer) {
-        print("handled")
+        let location = sender.location(in: self).y
+        for i in 0...9 {
+            if cells[i].frame.minY < location && cells[i].frame.maxX > location && i != self.selected {
+                selected = i
+            }
+        }
     }
     
     private func setupView() {
+        showsVerticalScrollIndicator = false
+        delegate = self
         backgroundColor = .systemGray6
         bounces = false
         
@@ -50,8 +75,10 @@ class ScheduleDayView: UIScrollView {
             }
             let heights = CellHeight(
                 weekHeight: cell.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/10),
-                dayHeight: cell.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 1/5))
+                dayStandardHeight: cell.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 2/11),
+                dayFeaturedHeight: cell.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 4/11))
             heights.weekHeight.isActive = true
+            
             self.cellsConstraints.append(heights)
             cells.append(cell)
 
@@ -70,6 +97,28 @@ class ScheduleDayView: UIScrollView {
                 contentCell.centerXAnchor.constraint(equalTo: cell.centerXAnchor),
                 contentCell.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
             ])
+        }
+    }
+}
+
+extension ScheduleDayView: UIScrollViewDelegate {
+    
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var pos = scrollView.contentOffset.y
+        let cellHeight = self.frame.height / 10
+        var keepGoing = true
+        var indexCounter = 0
+        while true {
+            if pos >= cellHeight && indexCounter < 9 {
+                pos -= cellHeight
+                indexCounter += 1
+            } else {
+                if indexCounter != self.selected {
+                    self.selected = indexCounter
+                }
+                break
+            }
         }
     }
 }

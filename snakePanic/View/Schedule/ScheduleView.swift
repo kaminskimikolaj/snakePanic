@@ -115,7 +115,11 @@ class ScheduleView: UIViewController {
                 self.horizontalRowsWidths[i].superWidth.isActive = false
                 self.horizontalRowsWidths[i].featuredWidth.isActive = true
                 for ii in 0...9 {
-                    self.horizontalRows[i].cellsConstraints[ii].dayHeight.isActive = false
+                    if ii == self.horizontalRows[i].selected {
+                        self.horizontalRows[i].cellsConstraints[ii].dayFeaturedHeight.isActive = false
+                    } else {
+                        self.horizontalRows[i].cellsConstraints[ii].dayStandardHeight.isActive = false
+                    }
                     self.horizontalRows[i].cellsConstraints[ii].weekHeight.isActive = true
                 }
             } else {
@@ -139,7 +143,11 @@ class ScheduleView: UIViewController {
                 self.horizontalRowsWidths[i].superWidth.isActive = true
                 for ii in 0...9 {
                     self.horizontalRows[i].cellsConstraints[ii].weekHeight.isActive = false
-                    self.horizontalRows[i].cellsConstraints[ii].dayHeight.isActive = true
+                    if ii == self.horizontalRows[i].selected {
+                        self.horizontalRows[i].cellsConstraints[ii].dayFeaturedHeight.isActive = true
+                    } else {
+                        self.horizontalRows[i].cellsConstraints[ii].dayStandardHeight.isActive = true
+                    }
                 }
             } else {
                 self.horizontalRowsWidths[i].standardWidth.isActive = false
