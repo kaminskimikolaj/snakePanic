@@ -7,10 +7,12 @@ class ScheduleDayView: UIScrollView {
     var setupTopAnchorConstraintsForWeekView = NSLayoutConstraint()
     var setupTopAnchorConstraintsForDayView = NSLayoutConstraint()
     var cellsConstraints = [CellHeight]()
+    var canIScroll = true
     
     var lastSelected = 0
     var selected: Int = 0 {
         didSet {
+            NSLog("selected: \(self.selected)")
             cellsConstraints[self.lastSelected].dayFeaturedHeight.isActive = false
             cellsConstraints[self.lastSelected].dayStandardHeight.isActive = true
 
@@ -40,14 +42,7 @@ class ScheduleDayView: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-        let location = sender.location(in: self).y
-        for i in 0...9 {
-            if cells[i].frame.minY < location && cells[i].frame.maxX > location && i != self.selected {
-                selected = i
-            }
-        }
-    }
+
     
     private func setupView() {
         showsVerticalScrollIndicator = false
@@ -55,8 +50,7 @@ class ScheduleDayView: UIScrollView {
         backgroundColor = .systemGray6
         bounces = false
         
-        let touchUpInside = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        addGestureRecognizer(touchUpInside)
+
         addSubview(setup)
         setup.translatesAutoresizingMaskIntoConstraints = false
         setup.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
@@ -65,6 +59,7 @@ class ScheduleDayView: UIScrollView {
         
         for i in 0...9 {
             let cell = UIView(frame: .zero)
+            cell.backgroundColor = .systemPink
             addSubview(cell)
             cell.translatesAutoresizingMaskIntoConstraints = false
             cell.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -99,22 +94,37 @@ class ScheduleDayView: UIScrollView {
             ])
         }
     }
+    
+//    func scrollToSelected() {
+//        print(self.frame.height)
+//        var offset: CGFloat = 0
+//        for i in 0...self.selected {
+//            offset += self.cells[i].frame.height
+//        }
+//        print(offset)
+//        offset -= self.frame.height
+//        print(offset)
+//        self.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
+//        print(contentOffset)
+//        let cellHeight = self.frame.height / 10
+//        self.setContentOffset(CGPoint(x: 0, y: cellHeight * CGFloat(self.selected)), animated: true)
+//    }
 }
 
 extension ScheduleDayView: UIScrollViewDelegate {
     
-
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        NSLog("entered")
         var pos = scrollView.contentOffset.y
+        NSLog("pos: \(pos)")
         let cellHeight = self.frame.height / 10
-        var keepGoing = true
         var indexCounter = 0
         while true {
             if pos >= cellHeight && indexCounter < 9 {
                 pos -= cellHeight
                 indexCounter += 1
             } else {
-                if indexCounter != self.selected {
+                if indexCounter != self.selected && canIScroll {
                     self.selected = indexCounter
                 }
                 break

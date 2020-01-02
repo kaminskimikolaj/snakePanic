@@ -18,7 +18,7 @@
 		9091ABE62368746800E43F37 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABE22368746700E43F37 /* CoreDataStack.swift */; };
 		9091ABE82368746800E43F37 /* CoreDataStackFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */; };
 		909AC6F923687DD6006E3D76 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 909AC6F723687DD6006E3D76 /* CoreDataModel.xcdatamodeld */; };
-		90B79E1A2398E04000237C33 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B79E192398E04000237C33 /* ScheduleView.swift */; };
+		90B79E1A2398E04000237C33 /* ScheduleWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B79E192398E04000237C33 /* ScheduleWeekView.swift */; };
 		90F9B960239F273B00B403CB /* ScheduleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F9B95F239F273B00B403CB /* ScheduleDayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,7 +37,7 @@
 		9091ABE22368746700E43F37 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackFetch.swift; sourceTree = "<group>"; };
 		909AC6F823687DD6006E3D76 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		90B79E192398E04000237C33 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		90B79E192398E04000237C33 /* ScheduleWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekView.swift; sourceTree = "<group>"; };
 		90F9B95F239F273B00B403CB /* ScheduleDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayView.swift; sourceTree = "<group>"; };
 		D46392113E00EA40DBBA57F1 /* Pods-snakePanic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.release.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +118,7 @@
 		90F9B961239F276B00B403CB /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				90B79E192398E04000237C33 /* ScheduleView.swift */,
+				90B79E192398E04000237C33 /* ScheduleWeekView.swift */,
 				90F9B95F239F273B00B403CB /* ScheduleDayView.swift */,
 			);
 			path = Schedule;
@@ -257,7 +257,7 @@
 			files = (
 				9091ABDF2368745100E43F37 /* HtmlScrapper.swift in Sources */,
 				90F9B960239F273B00B403CB /* ScheduleDayView.swift in Sources */,
-				90B79E1A2398E04000237C33 /* ScheduleView.swift in Sources */,
+				90B79E1A2398E04000237C33 /* ScheduleWeekView.swift in Sources */,
 				909AC6F923687DD6006E3D76 /* CoreDataModel.xcdatamodeld in Sources */,
 				9091ABE62368746800E43F37 /* CoreDataStack.swift in Sources */,
 				905E936F239905C200554A54 /* YellowViewController.swift in Sources */,
@@ -392,6 +392,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GW9JX6L683;
 				INFOPLIST_FILE = snakePanic/Info.plist;
@@ -401,6 +402,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikolajkaminski.snakePanic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -413,6 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GW9JX6L683;
 				INFOPLIST_FILE = snakePanic/Info.plist;
@@ -422,6 +425,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mikolajkaminski.snakePanic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

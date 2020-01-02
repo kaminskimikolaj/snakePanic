@@ -21,8 +21,10 @@ class YellowViewController: UIViewController {
         singleTapGesture.numberOfTapsRequired = 1
         subview.addGestureRecognizer(singleTapGesture)
 
-        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDounbleTap(sender:)))
+//        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDounbleTap(sender:)))
+        let doubleTapGesture = UIShortTapGestureRecognizer(target: self, action: #selector(handleDounbleTap(sender:)))
         doubleTapGesture.numberOfTapsRequired = 2
+//        doubleTapGesture.
         subview.addGestureRecognizer(doubleTapGesture)
         
         singleTapGesture.require(toFail: doubleTapGesture)
@@ -34,9 +36,12 @@ class YellowViewController: UIViewController {
     }
     
     @objc func handleSingleTap(sender: UITapGestureRecognizer) {
-        print("single tap")
+//        print("single tap")
+        NSLog("single tap")
         self.subview.backgroundColor = .systemBlue
     }
+    
+    
 //    let setup: UILabel = {
 //        let label = UILabel(frame: .zero)
 //        label.translatesAutoresizingMaskIntoConstraints = false
@@ -70,3 +75,19 @@ class YellowViewController: UIViewController {
 //    }
 
 }
+
+//class UIShortTapGestureRecognizer: UITapGestureRecognizer {
+//    let tapMaxDelay: Double = 0.25
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+//        super.touchesBegan(touches, with: event)
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + tapMaxDelay) { [weak self] in
+//            if self?.state != UIGestureRecognizer.State.recognized {
+//                self?.state = UIGestureRecognizer.State.failed
+//            }
+//        }
+//    }
+//}
+
+

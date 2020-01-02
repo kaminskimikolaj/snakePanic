@@ -32,7 +32,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }()
     
     lazy public var prototype2: UIViewController = {
-        let prototype2 = ScheduleView()
+        let prototype2 = ScheduleWeekView()
 //        prototype2.isNavigationBarHidden = true
         prototype2.tabBarItem = UITabBarItem(title: "Prototype 2", image: UIImage(named: "Map"), tag: 1)
         

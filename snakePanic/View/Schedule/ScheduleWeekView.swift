@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ScheduleView: UIViewController {
+class ScheduleWeekView: UIViewController {
 
     var horizontalRows = [ScheduleDayView]()
     var horizontalRowsWidths = [HorizontalRowWidth]()
     
-    lazy var doubleTap = UITapGestureRecognizer(target: self, action: #selector(self.handlDoubleTap(sender:)))
-    lazy var pan = PanTouchDownGestureRecognizer(target: self, action: #selector(handleTest(sender:)))
+    lazy var doubleTap = UIShortTapGestureRecognizer(target: self, action: #selector(self.handleDobuleTap(sender:)))
+    lazy var pan = UIPanTouchDownGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
+    lazy var touchDownTap = UITapGestureRecognizer(target: self, action: #selector(handleTouchDownTap(sender:)))
     
     var lastSelected: Int = 4
     var selected: Int = 4 {
@@ -41,7 +42,7 @@ class ScheduleView: UIViewController {
     var beganPanLocation: Int?
     var endedPanLocation: Int?
     
-    @objc func handleTest(sender: PanTouchDownGestureRecognizer) {
+    @objc func handlePan(sender: UIPanTouchDownGestureRecognizer) {
         let location = sender.location(in: self.view).x
         var selectedIndex = Int()
         for i in 0...4 {
@@ -66,10 +67,28 @@ class ScheduleView: UIViewController {
         }
     }
     
-    @objc func handlDoubleTap(sender: UITapGestureRecognizer) {
+    @objc func handleDobuleTap(sender: UITapGestureRecognizer) {
+        NSLog("handlingDoubleTap")
+        self.horizontalRows[self.selected].canIScroll = false
+        self.horizontalRows[self.selected].selected = 0
         self.view.removeGestureRecognizer(doubleTap)
+        self.view.removeGestureRecognizer(touchDownTap)
         self.view.addGestureRecognizer(pan)
         featuredWidth()
+    }
+    
+    @objc func handleTouchDownTap(sender: UITapGestureRecognizer) {
+        let cellHeight = self.horizontalRows[self.selected].frame.height / 10
+        let location = sender.location(in: self.horizontalRows[selected]).y
+        for i in 0...9 {
+            if self.horizontalRows[selected].cells[i].frame.minY < location && self.horizontalRows[selected].cells[i].frame.maxY > location {
+                var newOffset = cellHeight * CGFloat(i)
+                if i != 9 {
+                    newOffset += 25
+                }
+                self.horizontalRows[self.selected].setContentOffset(CGPoint(x: 0, y: newOffset), animated: true)
+            }
+        }
     }
     
     struct HorizontalRowWidth {
@@ -137,6 +156,8 @@ class ScheduleView: UIViewController {
     }
     
     func superWidth() {
+        self.horizontalRows[self.selected].canIScroll = true
+//        self.horizontalRows[self.selected].selected = 0
         for i in 0...4 {
             if selected == i {
                 self.horizontalRowsWidths[i].featuredWidth.isActive = false
@@ -162,18 +183,43 @@ class ScheduleView: UIViewController {
             self.doubleTap.numberOfTapsRequired = 2
             self.view.addGestureRecognizer(self.doubleTap)
             
+            self.touchDownTap.require(toFail: self.doubleTap)
+//            self.touchDownTap.cancelsTouchesInView = false
+            self.view.addGestureRecognizer(self.touchDownTap)
+            
             self.horizontalRows[self.selected].setupTopAnchorConstraintsForWeekView.isActive = false
             self.horizontalRows[self.selected].setupTopAnchorConstraintsForDayView.isActive = true
         })
     }
 }
 
-class PanTouchDownGestureRecognizer: UIPanGestureRecognizer {
+class UIPanTouchDownGestureRecognizer: UIPanGestureRecognizer {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         if (self.state == UIGestureRecognizer.State.began) { return }
         super.touchesBegan(touches, with: event)
         self.state = UIGestureRecognizer.State.began
     }
+}
 
+//class UITouchDownTap: UITapGestureRecognizer {
+//
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+//        if (self.state == UIGestureRecognizer.State.began) { return }
+//        super.touchesBegan(touches, with: event)
+//        self.state = UIGestureRecognizer.State.began
+//    }
+//}
+class UIShortTapGestureRecognizer: UITapGestureRecognizer {
+    let tapMaxDelay: Double = 0.3
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesBegan(touches, with: event)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + tapMaxDelay) { [weak self] in
+            if self?.state != UIGestureRecognizer.State.recognized {
+                self?.state = UIGestureRecognizer.State.failed
+            }
+        }
+    }
 }
