@@ -59,7 +59,7 @@ class ScheduleDayView: UIScrollView {
         
         for i in 0...9 {
             let cell = UIView(frame: .zero)
-            cell.backgroundColor = .systemPink
+//            cell.backgroundColor = .systemPink
             addSubview(cell)
             cell.translatesAutoresizingMaskIntoConstraints = false
             cell.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -78,11 +78,12 @@ class ScheduleDayView: UIScrollView {
             cells.append(cell)
 
             let contentCell = UIView(frame: .zero)
-            if i % 2 == 0 {
-                contentCell.backgroundColor = .systemTeal
-            } else {
-                contentCell.backgroundColor = .systemGreen
-            }
+            contentCell.backgroundColor = .systemGray2
+//            if i % 2 == 0 {
+//                contentCell.backgroundColor = .systemTeal
+//            } else {
+//                contentCell.backgroundColor = .systemGreen
+//            }
             contentCell.layer.cornerRadius = 5.0
             cell.addSubview(contentCell)
             contentCell.translatesAutoresizingMaskIntoConstraints = false
@@ -132,3 +133,6 @@ extension ScheduleDayView: UIScrollViewDelegate {
         }
     }
 }
+
+
+//TODO: make scrolling more responsive. The problem is that uiscrollview is not working well with my touch gesture. To fix that changing uiscrollview to pan normal uiview with pan gesture is probably necessary
