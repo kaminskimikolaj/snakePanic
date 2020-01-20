@@ -97,63 +97,120 @@ import UIKit
 
 class YellowViewController: UIViewController {
 
-    let barView = UIView(frame: .zero)
-    let textView = UILabel(frame: .zero)
-    let rightButton = UIView(frame: .zero)
+//    let barView = UIView(frame: .zero)
+//    let textView = UILabel(frame: .zero)
+//    let rightButton = UIView(frame: .zero)
+//
+//    override func viewDidLoad() {
+//        barView.backgroundColor = .systemGray2
+//        barView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(barView)
+//        NSLayoutConstraint.activate([
+//            barView.widthAnchor.constraint(equalTo: view.widthAnchor),
+//            barView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            barView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/12)
+//        ])
+//
+//        textView.text = "test test test test test test test test test test test"
+//        textView.adjustsFontSizeToFitWidth = true
+//        textView.textAlignment = .center
+//        barView.addSubview(textView)
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            textView.topAnchor.constraint(equalTo: barView.topAnchor),
+//            textView.heightAnchor.constraint(equalTo: barView.heightAnchor),
+//            textView.widthAnchor.constraint(equalTo: barView.widthAnchor, multiplier: 4/5),
+//            textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
+//        ])
+//        barView.addSubview(rightButton)
+//        rightButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
+//            rightButton.rightAnchor.constraint(equalTo: barView.rightAnchor),
+//            rightButton.heightAnchor.constraint(equalTo: barView.heightAnchor)
+//        ])
+//    }
+//
+//    override func viewDidLayoutSubviews() {
+//
+//        let height = view.safeAreaLayoutGuide.layoutFrame.height / 12
+//        let width = view.frame.width / 10
+//
+//        let safeHeight = height * 3/5
+//        let safeWidth = width * 3/5
+//
+//        let image = UIImage(named: "button37d2")
+//        let imageView = UIImageView(image: image!)
+//        imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
+//        rightButton.addSubview(imageView)
+//    }
+
+    let container = UIView(frame: CGRect(x: 0, y: 0, width: 300, height: 1000))
+    var lastTranslation: CGFloat = 0
+    var height: CGFloat = 0
     
-    override func viewDidLoad() {
-        barView.backgroundColor = .systemGray2
-        barView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(barView)
-        NSLayoutConstraint.activate([
-            barView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            barView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            barView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/12)
-        ])
+    @objc func action(sender: UIPanGestureRecognizer) {
+
+        if sender.state == .began { lastTranslation = 0 }
+        let translation = sender.translation(in: container).y
+        print(translation, container.frame.origin.y, sender.state.rawValue)
+        if container.frame.origin.y + (translation - lastTranslation) > 0 {
+            container.frame.origin.y = 0
+//            print(container.frame.origin.y)
+        } else if 1000 + container.frame.origin.y + (translation - lastTranslation) < height {
+//            print("now")
+            container.frame.origin.y = -(1000 - height)
+        } else {
+            container.frame.origin.y += (translation - lastTranslation)
+            lastTranslation = translation
+            print(container.frame.origin.y)
+        }
         
-        textView.text = "test test test test test test test test test test test"
-        textView.adjustsFontSizeToFitWidth = true
-        textView.textAlignment = .center
-        barView.addSubview(textView)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-//        textView.backgroundColor = .systemPink
-        NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: barView.topAnchor),
-            textView.heightAnchor.constraint(equalTo: barView.heightAnchor),
-            textView.widthAnchor.constraint(equalTo: barView.widthAnchor, multiplier: 4/5),
-            textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
-        ])
-        
-        barView.addSubview(rightButton)
-        rightButton.translatesAutoresizingMaskIntoConstraints = false
-//        rightButton.backgroundColor = .systemBlue
-        NSLayoutConstraint.activate([
-            rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
-            rightButton.rightAnchor.constraint(equalTo: barView.rightAnchor),
-            rightButton.heightAnchor.constraint(equalTo: barView.heightAnchor)
-        ])
+//        if !(container.frame.origin.y + (translation - lastTranslation) > 0) && !(1000 + container.frame.origin.y + (translation - lastTranslation) < height) {
+//            container.frame.origin.y += (translation - lastTranslation)
+//            lastTranslation = translation
+//            print(container.frame.origin.y)
+//        }
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        height = self.view.frame.height - (self.tabBarController?.tabBar.frame.height)!
+//        print(view.frame.height)
+        print(height)
+        view.backgroundColor = .systemBlue
+//        container.backgroundColor = .systemBlue
+        view.addSubview(container)
         
-        let height = view.safeAreaLayoutGuide.layoutFrame.height / 12
-        let width = view.frame.width / 10
         
-        let safeHeight = height * 3/5
-        let safeWidth = width * 3/5
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(action(sender:)))
+        container.addGestureRecognizer(panGesture)
         
-        let path = UIBezierPath()
-        path.move(to: .zero)
-        path.addLine(to: CGPoint(x: 0, y: safeHeight))
-        path.addLine(to: CGPoint(x: safeWidth, y: safeHeight / 2))
-        path.close()
+
         
-        let layer = CAShapeLayer()
-        layer.path = path.cgPath
-        layer.fillColor = UIColor.systemGray4.cgColor
-        layer.cornerRadius = 2
-        let rightbutton2 = UIView(frame: CGRect(x: width / 5, y: height / 5, width: safeWidth, height: safeHeight))
-        rightbutton2.layer.addSublayer(layer)
-        self.rightButton.addSubview(rightbutton2)
+        
+        var subviews = [UIView]()
+        
+        for i in 0...9 {
+            let subview = UIView(frame: .zero)
+            if i % 2 == 0 {
+                subview.backgroundColor = .systemPink
+            } else {
+                subview.backgroundColor = .systemOrange
+            }
+            subview.translatesAutoresizingMaskIntoConstraints = false
+            container.addSubview(subview)
+            subviews.append(subview)
+            
+            if i == 0 {
+                subview.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+            } else {
+//                print(subviews)
+                subview.topAnchor.constraint(equalTo: subviews[i - 1].bottomAnchor).isActive = true
+            }
+            subview.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
+            subview.heightAnchor.constraint(equalTo: container.heightAnchor, multiplier: 1/10).isActive = true
+        }
     }
 }

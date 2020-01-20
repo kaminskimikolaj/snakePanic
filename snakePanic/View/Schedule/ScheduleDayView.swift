@@ -41,8 +41,10 @@ class ScheduleDayView: UIScrollView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 
+    @objc func action(sender: UIButton!) {
+        print("action")
+    }
     
     private func setupView() {
         showsVerticalScrollIndicator = false
@@ -57,8 +59,12 @@ class ScheduleDayView: UIScrollView {
         setup.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         setup.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
+
+        
         for i in 0...9 {
             let cell = UIView(frame: .zero)
+//            let cell = UIButton(frame: .zero)
+//            cell.addTarget(self, action: #selector(action(sender:)), for: .touchDown)
 //            cell.backgroundColor = .systemPink
             addSubview(cell)
             cell.translatesAutoresizingMaskIntoConstraints = false
@@ -77,7 +83,9 @@ class ScheduleDayView: UIScrollView {
             self.cellsConstraints.append(heights)
             cells.append(cell)
 
+//            let contentCell = UIButton(frame: .zero)
             let contentCell = UIView(frame: .zero)
+//            contentCell.addTarget(self, action: #selector(action(sender:)), for: .touchDown)
             contentCell.backgroundColor = .systemGray2
 //            if i % 2 == 0 {
 //                contentCell.backgroundColor = .systemTeal
@@ -131,6 +139,22 @@ extension ScheduleDayView: UIScrollViewDelegate {
                 break
             }
         }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("now")
+        scrollView.isScrollEnabled = false
+        scrollView.isScrollEnabled = true
+//        var offset = scrollView.contentOffset
+//        offset.y -= 1
+//        offset.x -= 1
+//        scrollView.setContentOffset(offset, animated: false)
+//        offset.y += 1
+//        offset.x += 1
+//
+//        scrollView.setContentOffset(offset, animated: false)
+        
+        
     }
 }
 

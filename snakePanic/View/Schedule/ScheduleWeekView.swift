@@ -71,7 +71,7 @@ class ScheduleWeekView: UIViewController {
         NSLog("handlingDoubleTap")
         self.horizontalRows[self.selected].canIScroll = false
         self.horizontalRows[self.selected].selected = 0
-        self.view.removeGestureRecognizer(doubleTap)
+//        self.view.removeGestureRecognizer(doubleTap)
         self.view.removeGestureRecognizer(touchDownTap)
         self.view.addGestureRecognizer(pan)
         featuredWidth()
@@ -180,12 +180,12 @@ class ScheduleWeekView: UIViewController {
         }, completion: { _ in
             self.view.removeGestureRecognizer(self.pan)
             
-            self.doubleTap.numberOfTapsRequired = 2
-            self.view.addGestureRecognizer(self.doubleTap)
+//            self.doubleTap.numberOfTapsRequired = 2
+//            self.view.addGestureRecognizer(self.doubleTap)
             
-            self.touchDownTap.require(toFail: self.doubleTap)
+//            self.touchDownTap.require(toFail: self.doubleTap)
 //            self.touchDownTap.cancelsTouchesInView = false
-            self.view.addGestureRecognizer(self.touchDownTap)
+//            self.view.addGestureRecognizer(self.touchDownTap)
             
             self.horizontalRows[self.selected].setupTopAnchorConstraintsForWeekView.isActive = false
             self.horizontalRows[self.selected].setupTopAnchorConstraintsForDayView.isActive = true
