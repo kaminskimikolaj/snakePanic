@@ -24,7 +24,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     
     
     lazy public var prototype1: UIViewController = {
-        let prototype1 = YellowViewController()
+//        let prototype1 = YellowViewController()
+        let prototype1 = TopBarTestViewController()
 //        let prototype1 = UINavigationController(rootViewController: YellowViewController())
 //        prototype1.isNavigationBarHidden = true
         prototype1.tabBarItem = UITabBarItem(title: "Prototype 1", image: UIImage(named: "Schedule"), tag: 0)

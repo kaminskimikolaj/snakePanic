@@ -13,7 +13,7 @@ class ScheduleWeekView: UIViewController {
     var horizontalRows = [ScheduleDayView]()
     var horizontalRowsWidths = [HorizontalRowWidth]()
     
-    lazy var doubleTap = UIShortTapGestureRecognizer(target: self, action: #selector(self.handleDobuleTap(sender:)))
+    lazy var doubleTap = UIShortTapGestureRecognizer(target: self, action: #selector(self.handleDoubleTap(sender:)))
     lazy var pan = UIPanTouchDownGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
     lazy var touchDownTap = UITapGestureRecognizer(target: self, action: #selector(handleTouchDownTap(sender:)))
     
@@ -67,7 +67,7 @@ class ScheduleWeekView: UIViewController {
         }
     }
     
-    @objc func handleDobuleTap(sender: UITapGestureRecognizer) {
+    @objc func handleDoubleTap(sender: UITapGestureRecognizer) {
         NSLog("handlingDoubleTap")
         self.horizontalRows[self.selected].canIScroll = false
         self.horizontalRows[self.selected].selected = 0
@@ -87,6 +87,8 @@ class ScheduleWeekView: UIViewController {
                     newOffset += 25
                 }
                 self.horizontalRows[self.selected].setContentOffset(CGPoint(x: 0, y: newOffset), animated: true)
+                print("selected: \(i)")
+                self.horizontalRows[self.selected].selected = i
             }
         }
     }
@@ -101,6 +103,7 @@ class ScheduleWeekView: UIViewController {
     func setupViews() {
         for i in 0...4 {
             let horizontalRow = ScheduleDayView(frame: .zero)
+            
             horizontalRow.setupTopAnchorConstraintsForWeekView = horizontalRow.setup.topAnchor.constraint(equalTo: horizontalRow.topAnchor)
             horizontalRow.setupTopAnchorConstraintsForWeekView.isActive = true
             let height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - (self.tabBarController?.tabBar.frame.height)!
@@ -180,12 +183,12 @@ class ScheduleWeekView: UIViewController {
         }, completion: { _ in
             self.view.removeGestureRecognizer(self.pan)
             
-//            self.doubleTap.numberOfTapsRequired = 2
-//            self.view.addGestureRecognizer(self.doubleTap)
+            self.doubleTap.numberOfTapsRequired = 2
+            self.view.addGestureRecognizer(self.doubleTap)
             
-//            self.touchDownTap.require(toFail: self.doubleTap)
-//            self.touchDownTap.cancelsTouchesInView = false
-//            self.view.addGestureRecognizer(self.touchDownTap)
+            self.touchDownTap.require(toFail: self.doubleTap)
+            self.touchDownTap.cancelsTouchesInView = false
+            self.view.addGestureRecognizer(self.touchDownTap)
             
             self.horizontalRows[self.selected].setupTopAnchorConstraintsForWeekView.isActive = false
             self.horizontalRows[self.selected].setupTopAnchorConstraintsForDayView.isActive = true
@@ -225,3 +228,50 @@ class UIShortTapGestureRecognizer: UITapGestureRecognizer {
 }
 
 
+//    let barView = UIView(frame: .zero)
+//    let textView = UILabel(frame: .zero)
+//    let rightButton = UIView(frame: .zero)
+//
+//    override func viewDidLoad() {
+//        barView.backgroundColor = .systemGray2
+//        barView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(barView)
+//        NSLayoutConstraint.activate([
+//            barView.widthAnchor.constraint(equalTo: view.widthAnchor),
+//            barView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            barView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/12)
+//        ])
+//
+//        textView.text = "test test test test test test test test test test test"
+//        textView.adjustsFontSizeToFitWidth = true
+//        textView.textAlignment = .center
+//        barView.addSubview(textView)
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            textView.topAnchor.constraint(equalTo: barView.topAnchor),
+//            textView.heightAnchor.constraint(equalTo: barView.heightAnchor),
+//            textView.widthAnchor.constraint(equalTo: barView.widthAnchor, multiplier: 4/5),
+//            textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
+//        ])
+//        barView.addSubview(rightButton)
+//        rightButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
+//            rightButton.rightAnchor.constraint(equalTo: barView.rightAnchor),
+//            rightButton.heightAnchor.constraint(equalTo: barView.heightAnchor)
+//        ])
+//    }
+//
+//    override func viewDidLayoutSubviews() {
+//
+//        let height = view.safeAreaLayoutGuide.layoutFrame.height / 12
+//        let width = view.frame.width / 10
+//
+//        let safeHeight = height * 3/5
+//        let safeWidth = width * 3/5
+//
+//        let image = UIImage(named: "button37d2")
+//        let imageView = UIImageView(image: image!)
+//        imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
+//        rightButton.addSubview(imageView)
+//    }

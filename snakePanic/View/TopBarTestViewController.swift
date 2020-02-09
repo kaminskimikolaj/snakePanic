@@ -1,0 +1,74 @@
+//
+//  TopBarTestViewController.swift
+//  snakePanic
+//
+//  Created by Mikołaj Kamiński on 08/02/2020.
+//  Copyright © 2020 Mikołaj Kamiński. All rights reserved.
+//
+
+import UIKit
+
+class TopBarTestViewController: UIViewController {
+    
+    override func viewDidLoad() {
+        let subview = ScheduleDayView(frame: .zero)
+        subview.setupTopAnchorConstraintsForDayView = subview.setup.topAnchor.constraint(equalTo: subview.topAnchor, constant: 400 * 2)
+
+        view.addSubview(subview)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            subview.topAnchor.constraint(equalTo: view.topAnchor),
+            subview.widthAnchor.constraint(equalTo: view.widthAnchor),
+            subview.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+
+//    let barView = UIView(frame: .zero)
+//    let textView = UILabel(frame: .zero)
+//    let rightButton = UIView(frame: .zero)
+//
+//    override func viewDidLoad() {
+//        barView.backgroundColor = .systemGray2
+//        barView.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(barView)
+//        NSLayoutConstraint.activate([
+//            barView.widthAnchor.constraint(equalTo: view.widthAnchor),
+//            barView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            barView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/12)
+//        ])
+//
+//        textView.text = "test test test test test test test test test test test"
+//        textView.adjustsFontSizeToFitWidth = true
+//        textView.textAlignment = .center
+//        barView.addSubview(textView)
+//        textView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            textView.topAnchor.constraint(equalTo: barView.topAnchor),
+//            textView.heightAnchor.constraint(equalTo: barView.heightAnchor),
+//            textView.widthAnchor.constraint(equalTo: barView.widthAnchor, multiplier: 4/5),
+//            textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
+//        ])
+//        barView.addSubview(rightButton)
+//        rightButton.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
+//            rightButton.rightAnchor.constraint(equalTo: barView.rightAnchor),
+//            rightButton.heightAnchor.constraint(equalTo: barView.heightAnchor)
+//        ])
+//    }
+//
+//    override func viewDidLayoutSubviews() {
+//
+//        let height = view.safeAreaLayoutGuide.layoutFrame.height / 12
+//        let width = view.frame.width / 10
+//
+//        let safeHeight = height * 3/5
+//        let safeWidth = width * 3/5
+//
+//        let image = UIImage(named: "button37d2")
+//        let imageView = UIImageView(image: image!)
+//        imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
+//        rightButton.addSubview(imageView)
+//    }
+
+}

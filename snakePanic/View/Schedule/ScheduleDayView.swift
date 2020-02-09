@@ -48,7 +48,7 @@ class ScheduleDayView: UIScrollView {
     
     private func setupView() {
         showsVerticalScrollIndicator = false
-        delegate = self
+//        delegate = self
         backgroundColor = .systemGray6
         bounces = false
         
@@ -63,9 +63,6 @@ class ScheduleDayView: UIScrollView {
         
         for i in 0...9 {
             let cell = UIView(frame: .zero)
-//            let cell = UIButton(frame: .zero)
-//            cell.addTarget(self, action: #selector(action(sender:)), for: .touchDown)
-//            cell.backgroundColor = .systemPink
             addSubview(cell)
             cell.translatesAutoresizingMaskIntoConstraints = false
             cell.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -120,43 +117,25 @@ class ScheduleDayView: UIScrollView {
 //    }
 }
 
-extension ScheduleDayView: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        NSLog("entered")
-        var pos = scrollView.contentOffset.y
-        NSLog("pos: \(pos)")
-        let cellHeight = self.frame.height / 10
-        var indexCounter = 0
-        while true {
-            if pos >= cellHeight && indexCounter < 9 {
-                pos -= cellHeight
-                indexCounter += 1
-            } else {
-                if indexCounter != self.selected && canIScroll {
-                    self.selected = indexCounter
-                }
-                break
-            }
-        }
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("now")
-        scrollView.isScrollEnabled = false
-        scrollView.isScrollEnabled = true
-//        var offset = scrollView.contentOffset
-//        offset.y -= 1
-//        offset.x -= 1
-//        scrollView.setContentOffset(offset, animated: false)
-//        offset.y += 1
-//        offset.x += 1
-//
-//        scrollView.setContentOffset(offset, animated: false)
-        
-        
-    }
-}
+//THIS PART BELOW WAS INTENDED FEAUTERE BUT IT BREAKS SCROLL VIEW
 
-
-//TODO: make scrolling more responsive. The problem is that uiscrollview is not working well with my touch gesture. To fix that changing uiscrollview to pan normal uiview with pan gesture is probably necessary
+//extension ScheduleDayView: UIScrollViewDelegate {
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        var pos = scrollView.contentOffset.y
+//        NSLog("pos: \(pos)")
+//        let cellHeight = self.frame.height / 10
+//        var indexCounter = 0
+//        while true {
+//            if pos >= cellHeight && indexCounter < 9 {
+//                pos -= cellHeight
+//                indexCounter += 1
+//            } else {
+//                if indexCounter != self.selected && canIScroll {
+//                    self.selected = indexCounter
+//                }
+//                break
+//            }
+//        }
+//    }
+//}

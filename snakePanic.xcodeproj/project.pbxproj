@@ -19,6 +19,7 @@
 		9091ABE82368746800E43F37 /* CoreDataStackFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */; };
 		909AC6F923687DD6006E3D76 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 909AC6F723687DD6006E3D76 /* CoreDataModel.xcdatamodeld */; };
 		90B79E1A2398E04000237C33 /* ScheduleWeekView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B79E192398E04000237C33 /* ScheduleWeekView.swift */; };
+		90EA1C5B23EE370100BC843D /* TopBarTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90EA1C5A23EE370100BC843D /* TopBarTestViewController.swift */; };
 		90F9B960239F273B00B403CB /* ScheduleDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F9B95F239F273B00B403CB /* ScheduleDayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		9091ABE52368746700E43F37 /* CoreDataStackFetch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStackFetch.swift; sourceTree = "<group>"; };
 		909AC6F823687DD6006E3D76 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		90B79E192398E04000237C33 /* ScheduleWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekView.swift; sourceTree = "<group>"; };
+		90EA1C5A23EE370100BC843D /* TopBarTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarTestViewController.swift; sourceTree = "<group>"; };
 		90F9B95F239F273B00B403CB /* ScheduleDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayView.swift; sourceTree = "<group>"; };
 		D46392113E00EA40DBBA57F1 /* Pods-snakePanic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.release.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +62,7 @@
 				90743245239476B700DD75F7 /* TabBarController.swift */,
 				90F9B961239F276B00B403CB /* Schedule */,
 				905E936E239905C200554A54 /* YellowViewController.swift */,
+				90EA1C5A23EE370100BC843D /* TopBarTestViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				905E936F239905C200554A54 /* YellowViewController.swift in Sources */,
 				9091ABDE2368745100E43F37 /* HttpsScrapper.swift in Sources */,
 				9091ABC5236873FF00E43F37 /* AppDelegate.swift in Sources */,
+				90EA1C5B23EE370100BC843D /* TopBarTestViewController.swift in Sources */,
 				9091ABE82368746800E43F37 /* CoreDataStackFetch.swift in Sources */,
 				90743246239476B700DD75F7 /* TabBarController.swift in Sources */,
 				9091ABE02368745100E43F37 /* Crypto.swift in Sources */,
