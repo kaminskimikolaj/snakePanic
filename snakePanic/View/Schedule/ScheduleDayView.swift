@@ -49,6 +49,7 @@ class ScheduleDayView: UIScrollView {
     private func setupView() {
         showsVerticalScrollIndicator = false
 //        delegate = self
+//        layer.cornerRadius = 0
         backgroundColor = .systemGray6
         bounces = false
         
