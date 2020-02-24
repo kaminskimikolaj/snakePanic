@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import hpple
+//import hpple
 import SwiftSoup
 
 class HttpsScrapper {
@@ -88,11 +88,11 @@ class HttpsScrapper {
             guard let httpResponse = response as? HTTPURLResponse else { handler(.failure(.responseCastingError)); return }
             print(httpResponse.statusCode)
             guard let responseData = data else { handler(.failure(.dataParsing)); return }
-            let doc = TFHpple(htmlData: responseData)
-            if let elements = doc?.search(withXPathQuery: "//iframe") as? [TFHppleElement] {
-                for element in elements { src = element.attributes["src"] as? String }
-                self.semaphore.signal()
-            } else { handler(.failure(.dataParsing)) }
+//            let doc = TFHpple(htmlData: responseData)
+//            if let elements = doc?.search(withXPathQuery: "//iframe") as? [TFHppleElement] {
+//                for element in elements { src = element.attributes["src"] as? String }
+//                self.semaphore.signal()
+//            } else { handler(.failure(.dataParsing)) }
         }.resume()
         semaphore.wait()
         

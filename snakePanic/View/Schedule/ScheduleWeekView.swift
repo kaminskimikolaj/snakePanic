@@ -15,12 +15,21 @@ class ScheduleWeekView: UIViewController {
     
     lazy var doubleTap = UIShortTapGestureRecognizer(target: self, action: #selector(self.handleDoubleTap(sender:)))
     lazy var pan = UIPanTouchDownGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
-    lazy var touchDownTap = UITapGestureRecognizer(target: self, action: #selector(handleTouchDownTap(sender:)))
+    lazy var singleTap = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
     
     let barView = UIView(frame: .zero)
     let textView = UILabel(frame: .zero)
     let rightButton = UIView(frame: .zero)
-    
+//    var isRightButtonSelected = false {
+//        didSet {
+//            if self.isRightButtonSelected {
+//                rightButton.backgroundColor = .systemTeal
+//            } else {
+//                rightButton.backgroundColor = .systemBlue
+//            }
+//        }
+//    }
+//
     var lastSelected: Int = 4
     var selected: Int = 4 {
         didSet {
@@ -62,6 +71,8 @@ class ScheduleWeekView: UIViewController {
             textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
         ])
         barView.addSubview(rightButton)
+        rightButton.backgroundColor = .systemTeal
+//        rightButton.addTarget(self, action: #selector(handleRightButtonTap(sender:)), for: .touchUpInside)
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
@@ -83,41 +94,53 @@ class ScheduleWeekView: UIViewController {
     var endedPanLocation: Int?
     
     @objc func handlePan(sender: UIPanTouchDownGestureRecognizer) {
-        let location = sender.location(in: self.view).x
-        var selectedIndex = Int()
-        for i in 0...4 {
-            if self.horizontalRows[i].frame.minX < location && location < self.horizontalRows[i].frame.maxX {
-                selectedIndex = i
+//        print("handling pan")
+        if !(self.rightButton.frame.contains(sender.location(in: self.view))) {
+            let location = sender.location(in: self.view).x
+            var selectedIndex = Int()
+            for i in 0...4 {
+                if self.horizontalRows[i].frame.minX < location && location < self.horizontalRows[i].frame.maxX {
+                    selectedIndex = i
+                }
             }
-        }
-
-        if location < self.horizontalRows[selected].frame.minX || location > self.horizontalRows[selected].frame.maxX {
-            self.selected = selectedIndex
-            beganPanLocation = nil
-            endedPanLocation = nil
-        } else {
-            if sender.state == .began { beganPanLocation = selectedIndex }
-            if sender.state == .ended { endedPanLocation = selectedIndex }
             
-            if sender.state == .ended && beganPanLocation == endedPanLocation && beganPanLocation != nil {
-                superWidth()
+            if location < self.horizontalRows[selected].frame.minX || location > self.horizontalRows[selected].frame.maxX {
+                self.selected = selectedIndex
                 beganPanLocation = nil
                 endedPanLocation = nil
+            } else {
+                if sender.state == .began { beganPanLocation = selectedIndex }
+                if sender.state == .ended { endedPanLocation = selectedIndex }
+                
+                if sender.state == .ended && beganPanLocation == endedPanLocation && beganPanLocation != nil {
+                    superWidth()
+                    beganPanLocation = nil
+                    endedPanLocation = nil
+                }
             }
+        } else {
+            textView.text = "2020-02-17 - 2020-02-21"
+//            if isRightButtonSelected {
+//                isRightButtonSelected = false
+//            } else {
+//                isRightButtonSelected = true
+//            }
+            
         }
     }
     
     @objc func handleDoubleTap(sender: UITapGestureRecognizer) {
-        NSLog("handlingDoubleTap")
-        self.horizontalRows[self.selected].canIScroll = false
+        print("handlingDoubleTap")
+        self.horizontalRows[self.selected].scrollingEnabled = false
         self.horizontalRows[self.selected].selected = 0
 //        self.view.removeGestureRecognizer(doubleTap)
-        self.view.removeGestureRecognizer(touchDownTap)
+        self.view.removeGestureRecognizer(singleTap)
         self.view.addGestureRecognizer(pan)
         featuredWidth()
     }
     
-    @objc func handleTouchDownTap(sender: UITapGestureRecognizer) {
+    @objc func handleSingleTap(sender: UITapGestureRecognizer) {
+        print("handling single tap")
         let cellHeight = self.horizontalRows[self.selected].frame.height / 10
         let location = sender.location(in: self.horizontalRows[selected]).y
         for i in 0...9 {
@@ -127,7 +150,7 @@ class ScheduleWeekView: UIViewController {
                     newOffset += 25
                 }
                 self.horizontalRows[self.selected].setContentOffset(CGPoint(x: 0, y: newOffset), animated: true)
-                print("selected: \(i)")
+//                print("selected: \(i)")
                 self.horizontalRows[self.selected].selected = i
             }
         }
@@ -202,7 +225,7 @@ class ScheduleWeekView: UIViewController {
     }
     
     func superWidth() {
-        self.horizontalRows[self.selected].canIScroll = true
+        self.horizontalRows[self.selected].scrollingEnabled = true
 //        self.horizontalRows[self.selected].selected = 0
         for i in 0...4 {
             if selected == i {
@@ -230,9 +253,9 @@ class ScheduleWeekView: UIViewController {
             self.doubleTap.numberOfTapsRequired = 2
             self.view.addGestureRecognizer(self.doubleTap)
             
-            self.touchDownTap.require(toFail: self.doubleTap)
-            self.touchDownTap.cancelsTouchesInView = false
-            self.view.addGestureRecognizer(self.touchDownTap)
+            self.singleTap.require(toFail: self.doubleTap)
+            self.singleTap.cancelsTouchesInView = false
+            self.view.addGestureRecognizer(self.singleTap)
             
             self.horizontalRows[self.selected].setupTopAnchorConstraintsForWeekView.isActive = false
             self.horizontalRows[self.selected].setupTopAnchorConstraintsForDayView.isActive = true

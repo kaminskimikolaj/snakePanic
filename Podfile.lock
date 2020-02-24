@@ -1,20 +1,16 @@
 PODS:
-  - hpple (0.2.0)
-  - SwiftSoup (2.2.1)
+  - SwiftSoup (2.3.0)
 
 DEPENDENCIES:
-  - hpple
   - SwiftSoup
 
 SPEC REPOS:
   trunk:
-    - hpple
     - SwiftSoup
 
 SPEC CHECKSUMS:
-  hpple: 3b765f96fc2cd56ad1a49aef6f7be5cb2aa64b57
-  SwiftSoup: a91d3c96ecb6f8f13005552ef60f9075aae4a7f3
+  SwiftSoup: d78683f7ea0ae5733225a9e1d3bee5b256449df4
 
-PODFILE CHECKSUM: 6cc2882ca93c5f32a009e9283fd292a073d05efd
+PODFILE CHECKSUM: b0bf607588c4a94eb6dff3bf2c9853fcd32511d3
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.9.0.beta.3

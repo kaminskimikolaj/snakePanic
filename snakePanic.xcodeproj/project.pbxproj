@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		28BFC04E79D4CCFC75F97FA1 /* Pods_snakePanic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */; };
+		2F544319B1D79F6D1488F108 /* libPods-snakePanic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BBC5811698A005ACF28D80 /* libPods-snakePanic.a */; };
 		905E936F239905C200554A54 /* YellowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905E936E239905C200554A54 /* YellowViewController.swift */; };
 		90743246239476B700DD75F7 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90743245239476B700DD75F7 /* TabBarController.swift */; };
 		9091ABC5236873FF00E43F37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9091ABC4236873FF00E43F37 /* AppDelegate.swift */; };
@@ -24,7 +24,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_snakePanic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FD22EA3BCFB6C39CD8BB6F9 /* Pods-snakePanic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.debug.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.debug.xcconfig"; sourceTree = "<group>"; };
 		903F7D182368810200531EA4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		905E936E239905C200554A54 /* YellowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YellowViewController.swift; sourceTree = "<group>"; };
@@ -41,6 +40,7 @@
 		90B79E192398E04000237C33 /* ScheduleWeekView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleWeekView.swift; sourceTree = "<group>"; };
 		90EA1C5A23EE370100BC843D /* TopBarTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarTestViewController.swift; sourceTree = "<group>"; };
 		90F9B95F239F273B00B403CB /* ScheduleDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayView.swift; sourceTree = "<group>"; };
+		A6BBC5811698A005ACF28D80 /* libPods-snakePanic.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-snakePanic.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D46392113E00EA40DBBA57F1 /* Pods-snakePanic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-snakePanic.release.xcconfig"; path = "Target Support Files/Pods-snakePanic/Pods-snakePanic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -49,7 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28BFC04E79D4CCFC75F97FA1 /* Pods_snakePanic.framework in Frameworks */,
+				2F544319B1D79F6D1488F108 /* libPods-snakePanic.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +139,7 @@
 		F2338A5C85C82B80ACC17EDF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				38F9CA6D20271F73FA8E98D3 /* Pods_snakePanic.framework */,
+				A6BBC5811698A005ACF28D80 /* libPods-snakePanic.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -155,7 +155,6 @@
 				9091AB722368736A00E43F37 /* Sources */,
 				9091AB732368736A00E43F37 /* Frameworks */,
 				9091AB742368736A00E43F37 /* Resources */,
-				AAACFE8BB8F53394B6389528 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -232,23 +231,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AAACFE8BB8F53394B6389528 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-snakePanic/Pods-snakePanic-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-snakePanic/Pods-snakePanic-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-snakePanic/Pods-snakePanic-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -399,6 +381,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GW9JX6L683;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = snakePanic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -422,6 +405,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GW9JX6L683;
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = snakePanic/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

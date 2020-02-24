@@ -7,12 +7,12 @@ class ScheduleDayView: UIScrollView {
     var setupTopAnchorConstraintsForWeekView = NSLayoutConstraint()
     var setupTopAnchorConstraintsForDayView = NSLayoutConstraint()
     var cellsConstraints = [CellHeight]()
-    var canIScroll = true
+    var scrollingEnabled = true
     
     var lastSelected = 0
     var selected: Int = 0 {
         didSet {
-            NSLog("selected: \(self.selected)")
+//            NSLog("selected: \(self.selected)")
             cellsConstraints[self.lastSelected].dayFeaturedHeight.isActive = false
             cellsConstraints[self.lastSelected].dayStandardHeight.isActive = true
 
@@ -43,7 +43,7 @@ class ScheduleDayView: UIScrollView {
     }
 
     @objc func action(sender: UIButton!) {
-        print("action")
+//        print("action")
     }
     
     private func setupView() {
