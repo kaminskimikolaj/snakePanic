@@ -8,6 +8,7 @@ target 'snakePanic' do
   # Pods for snakePanic
   # pod 'hpple'
   pod 'SwiftSoup'
+  pod 'Kanna', '~> 4.0.0'
   # pod 'Alamofire'
   # pod 'PromiseKit/Alamofire', '~> 6.0'
 end

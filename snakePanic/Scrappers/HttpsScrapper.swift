@@ -8,6 +8,7 @@
 
 import UIKit
 //import hpple
+//import Kanna
 import SwiftSoup
 
 class HttpsScrapper {
@@ -88,6 +89,20 @@ class HttpsScrapper {
             guard let httpResponse = response as? HTTPURLResponse else { handler(.failure(.responseCastingError)); return }
             print(httpResponse.statusCode)
             guard let responseData = data else { handler(.failure(.dataParsing)); return }
+            print(String(data: responseData, encoding: .utf8))
+            do {
+                let doc: Document = try SwiftSoup.parse(String(data: responseData, encoding: .utf8)!)
+                src = try doc.select("iframe").first()?.attr("src")
+                self.semaphore.signal()
+//                let text: String = try doc.body()!.text()
+//                let link: String? = try! doc.select("iframe").first()?.attr("src")
+//                print(link)
+//                print(try! link.attr("src"))
+//                print(text)
+            }
+            catch { handler(.failure(.dataParsing)) }
+            
+
 //            let doc = TFHpple(htmlData: responseData)
 //            if let elements = doc?.search(withXPathQuery: "//iframe") as? [TFHppleElement] {
 //                for element in elements { src = element.attributes["src"] as? String }

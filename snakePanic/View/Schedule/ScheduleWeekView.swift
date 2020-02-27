@@ -20,16 +20,7 @@ class ScheduleWeekView: UIViewController {
     let barView = UIView(frame: .zero)
     let textView = UILabel(frame: .zero)
     let rightButton = UIView(frame: .zero)
-//    var isRightButtonSelected = false {
-//        didSet {
-//            if self.isRightButtonSelected {
-//                rightButton.backgroundColor = .systemTeal
-//            } else {
-//                rightButton.backgroundColor = .systemBlue
-//            }
-//        }
-//    }
-//
+    
     var lastSelected: Int = 4
     var selected: Int = 4 {
         didSet {
@@ -49,42 +40,7 @@ class ScheduleWeekView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        barView.backgroundColor = .systemGray6
-        barView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(barView)
-        NSLayoutConstraint.activate([
-            barView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            barView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            barView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/12)
-        ])
-
-        textView.text = "2020-02-10 - 2020-02-16"
-        textView.textColor = .systemGray
-        textView.adjustsFontSizeToFitWidth = true
-        textView.textAlignment = .center
-        barView.addSubview(textView)
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: barView.topAnchor),
-            textView.heightAnchor.constraint(equalTo: barView.heightAnchor),
-            textView.widthAnchor.constraint(equalTo: barView.widthAnchor, multiplier: 4/5),
-            textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
-        ])
-        barView.addSubview(rightButton)
-        rightButton.backgroundColor = .systemTeal
-//        rightButton.addTarget(self, action: #selector(handleRightButtonTap(sender:)), for: .touchUpInside)
-        rightButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
-            rightButton.rightAnchor.constraint(equalTo: barView.rightAnchor),
-            rightButton.heightAnchor.constraint(equalTo: barView.heightAnchor)
-        ])
-        
-//        let image = UIImage(named: "button37d2")
-//        let imageView = UIImageView(image: image!)
-//        imageView.frame = CGRect(x: width/5, y: height/5, width: 19.2, height: 24.95)
-//        rightButton.addSubview(imageView)
-        
+        setupBarView()
         setupViews()
         view.backgroundColor = .systemGray6
         view.addGestureRecognizer(pan)
@@ -94,7 +50,6 @@ class ScheduleWeekView: UIViewController {
     var endedPanLocation: Int?
     
     @objc func handlePan(sender: UIPanTouchDownGestureRecognizer) {
-//        print("handling pan")
         if !(self.rightButton.frame.contains(sender.location(in: self.view))) {
             let location = sender.location(in: self.view).x
             var selectedIndex = Int()
@@ -103,7 +58,6 @@ class ScheduleWeekView: UIViewController {
                     selectedIndex = i
                 }
             }
-            
             if location < self.horizontalRows[selected].frame.minX || location > self.horizontalRows[selected].frame.maxX {
                 self.selected = selectedIndex
                 beganPanLocation = nil
@@ -120,12 +74,6 @@ class ScheduleWeekView: UIViewController {
             }
         } else {
             textView.text = "2020-02-17 - 2020-02-21"
-//            if isRightButtonSelected {
-//                isRightButtonSelected = false
-//            } else {
-//                isRightButtonSelected = true
-//            }
-            
         }
     }
     
@@ -140,7 +88,6 @@ class ScheduleWeekView: UIViewController {
     }
     
     @objc func handleSingleTap(sender: UITapGestureRecognizer) {
-        print("handling single tap")
         let cellHeight = self.horizontalRows[self.selected].frame.height / 10
         let location = sender.location(in: self.horizontalRows[selected]).y
         for i in 0...9 {
@@ -150,7 +97,6 @@ class ScheduleWeekView: UIViewController {
                     newOffset += 25
                 }
                 self.horizontalRows[self.selected].setContentOffset(CGPoint(x: 0, y: newOffset), animated: true)
-//                print("selected: \(i)")
                 self.horizontalRows[self.selected].selected = i
             }
         }
@@ -163,18 +109,49 @@ class ScheduleWeekView: UIViewController {
         let zeroWidth: NSLayoutConstraint
     }
     
+    func setupBarView() {
+        barView.backgroundColor = .systemGray6
+        barView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(barView)
+        NSLayoutConstraint.activate([
+            barView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            barView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            barView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/12)
+        ])
+        textView.text = "2020-02-10 - 2020-02-16"
+        textView.textColor = .systemGray
+        textView.adjustsFontSizeToFitWidth = true
+        textView.textAlignment = .center
+        barView.addSubview(textView)
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            textView.topAnchor.constraint(equalTo: barView.topAnchor),
+            textView.heightAnchor.constraint(equalTo: barView.heightAnchor),
+            textView.widthAnchor.constraint(equalTo: barView.widthAnchor, multiplier: 4/5),
+            textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
+        ])
+        barView.addSubview(rightButton)
+        rightButton.backgroundColor = .systemTeal
+        rightButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
+            rightButton.rightAnchor.constraint(equalTo: barView.rightAnchor),
+            rightButton.heightAnchor.constraint(equalTo: barView.heightAnchor)
+        ])
+    }
+    
     func setupViews() {
         for i in 0...4 {
             let horizontalRow = ScheduleDayView(frame: .zero)
             horizontalRow.setupTopAnchorConstraintsForWeekView = horizontalRow.setup.topAnchor.constraint(equalTo: horizontalRow.topAnchor)
             horizontalRow.setupTopAnchorConstraintsForWeekView.isActive = true
-            let height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - (self.tabBarController?.tabBar.frame.height)!
+            var height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - (self.tabBarController?.tabBar.frame.height)!
+            height = height * 11/12
             horizontalRow.setupTopAnchorConstraintsForDayView = horizontalRow.setup.topAnchor.constraint(equalTo: horizontalRow.topAnchor, constant: height * 2)
  
             horizontalRows.append(horizontalRow)
             view.addSubview(horizontalRow)
             horizontalRow.translatesAutoresizingMaskIntoConstraints = false
-//            horizontalRow.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
             horizontalRow.topAnchor.constraint(equalTo: barView.bottomAnchor).isActive = true
             horizontalRow.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
             if i == 0 {
@@ -212,7 +189,6 @@ class ScheduleWeekView: UIViewController {
             } else {
                 self.horizontalRowsWidths[i].zeroWidth.isActive = false
                 self.horizontalRowsWidths[i].standardWidth.isActive = true
-//                self.horizontalRows[i].layer.cornerRadius = 0
             }
         }
         self.horizontalRows[self.selected].setupTopAnchorConstraintsForDayView.isActive = false
@@ -226,7 +202,6 @@ class ScheduleWeekView: UIViewController {
     
     func superWidth() {
         self.horizontalRows[self.selected].scrollingEnabled = true
-//        self.horizontalRows[self.selected].selected = 0
         for i in 0...4 {
             if selected == i {
                 self.horizontalRowsWidths[i].featuredWidth.isActive = false
@@ -272,10 +247,8 @@ class ScheduleWeekView: UIViewController {
 
             let safeHeight = height * 3/5
             let safeWidth = width * 3/5
-
-//            let image = UIImage(named: "button37d2")
+            
             let image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))
-//            image = image?.withTintColor(.systemGray2)
             let imageView = UIImageView(image: image!)
             imageView.image?.withRenderingMode(.alwaysTemplate)
             imageView.tintColor = .systemOrange
@@ -294,14 +267,6 @@ class UIPanTouchDownGestureRecognizer: UIPanGestureRecognizer {
     }
 }
 
-//class UITouchDownTap: UITapGestureRecognizer {
-//
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-//        if (self.state == UIGestureRecognizer.State.began) { return }
-//        super.touchesBegan(touches, with: event)
-//        self.state = UIGestureRecognizer.State.began
-//    }
-//}
 class UIShortTapGestureRecognizer: UITapGestureRecognizer {
     let tapMaxDelay: Double = 0.3
 
@@ -315,52 +280,3 @@ class UIShortTapGestureRecognizer: UITapGestureRecognizer {
         }
     }
 }
-
-
-//    let barView = UIView(frame: .zero)
-//    let textView = UILabel(frame: .zero)
-//    let rightButton = UIView(frame: .zero)
-//
-//    override func viewDidLoad() {
-//        barView.backgroundColor = .systemGray2
-//        barView.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(barView)
-//        NSLayoutConstraint.activate([
-//            barView.widthAnchor.constraint(equalTo: view.widthAnchor),
-//            barView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            barView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/12)
-//        ])
-//
-//        textView.text = "test test test test test test test test test test test"
-//        textView.adjustsFontSizeToFitWidth = true
-//        textView.textAlignment = .center
-//        barView.addSubview(textView)
-//        textView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            textView.topAnchor.constraint(equalTo: barView.topAnchor),
-//            textView.heightAnchor.constraint(equalTo: barView.heightAnchor),
-//            textView.widthAnchor.constraint(equalTo: barView.widthAnchor, multiplier: 4/5),
-//            textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
-//        ])
-//        barView.addSubview(rightButton)
-//        rightButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
-//            rightButton.rightAnchor.constraint(equalTo: barView.rightAnchor),
-//            rightButton.heightAnchor.constraint(equalTo: barView.heightAnchor)
-//        ])
-//    }
-//
-//    override func viewDidLayoutSubviews() {
-//
-//        let height = view.safeAreaLayoutGuide.layoutFrame.height / 12
-//        let width = view.frame.width / 10
-//
-//        let safeHeight = height * 3/5
-//        let safeWidth = width * 3/5
-//
-//        let image = UIImage(named: "button37d2")
-//        let imageView = UIImageView(image: image!)
-//        imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
-//        rightButton.addSubview(imageView)
-//    }

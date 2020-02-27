@@ -13,11 +13,37 @@ class TopBarTestViewController: UIViewController {
     let barView = UIView(frame: .zero)
     let textView = UILabel(frame: .zero)
     let rightButton = UIView(frame: .zero)
+    
+    func scrapLessonScheduleAndSave() {
+        let semaphore = DispatchSemaphore(value: 0)
+        DispatchQueue.global(qos: .background).async {
+            do { try HttpsScrapper().login(user: "S45_AR4Q5848168", pass: "c9VYgL4R") { result in
+                print(result)
+                semaphore.signal()
+            }}
+            catch let error { print(error) }
+            semaphore.wait()
+
+            do { try HttpsScrapper().scrapLessonsSchedule() { result in
+                switch result {
+                case .success(let data):
+                    print(data)
+                    let stack = CoreDataStack.sharedInstance
+                    stack.saveContext()
+                case .failure(let error):
+                    print("Error: \(error)")
+                }
+                semaphore.signal()
+            }}
+            catch let error { print(error) }
+        }
+    }
 
     override func viewDidLoad() {
         
-        do { try print(CoreDataStack().lessonsForDay(dayNumber: 2)[0].lessonName)
-        } catch { print("lkjsdlfja") }
+        scrapLessonScheduleAndSave()
+//        do { try print(CoreDataStack().lessonsForDay(dayNumber: 2)[0].lessonName)
+//        } catch { print("lkjsdlfja") }
     
         
         view.backgroundColor = .systemGray
