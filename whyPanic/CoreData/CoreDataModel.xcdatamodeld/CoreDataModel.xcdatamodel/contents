@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="18G103" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ScheduleDay" representedClassName="ScheduleDay" syncable="YES" codeGenerationType="class">
+        <attribute name="dayNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="lesson" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="ScheduleLesson" inverseName="day" inverseEntity="ScheduleLesson"/>
+        <relationship name="week" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="ScheduleWeek" inverseName="day" inverseEntity="ScheduleWeek"/>
+    </entity>
+    <entity name="ScheduleLesson" representedClassName="ScheduleLesson" syncable="YES" codeGenerationType="class">
+        <attribute name="end" optional="YES" attributeType="String"/>
+        <attribute name="groupName" optional="YES" attributeType="String"/>
+        <attribute name="lessonName" optional="YES" attributeType="String"/>
+        <attribute name="lessonNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="proxy" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="released" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="roomName" optional="YES" attributeType="String"/>
+        <attribute name="start" optional="YES" attributeType="String"/>
+        <attribute name="teacherName" optional="YES" attributeType="String"/>
+        <relationship name="day" optional="YES" maxCount="1" deletionRule="No Action" destinationEntity="ScheduleDay" inverseName="lesson" inverseEntity="ScheduleDay"/>
+    </entity>
+    <entity name="ScheduleWeek" representedClassName="ScheduleWeek" syncable="YES" codeGenerationType="class">
+        <relationship name="day" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="ScheduleDay" inverseName="week" inverseEntity="ScheduleDay"/>
+    </entity>
+    <elements>
+        <element name="ScheduleDay" positionX="-342" positionY="54" width="128" height="88"/>
+        <element name="ScheduleLesson" positionX="-631.86328125" positionY="50.1484375" width="128" height="193"/>
+        <element name="ScheduleWeek" positionX="-139.84765625" positionY="168.06640625" width="128" height="58"/>
+    </elements>
+</model>

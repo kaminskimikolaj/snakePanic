@@ -43,14 +43,14 @@ class HtmlScrapper {
                     if start.first == "0" {
                         start.removeFirst()
                     }
-                    print(start)
+//                    print(start)
                     lesson.start = start
                     
                     var end = String(timing[timing.index(timing.endIndex, offsetBy: -5)..<timing.endIndex])
                     if end.first == "0" {
                         end.removeFirst()
                     }
-                    print(end)
+//                    print(end)
                     lesson.end = end
                 case 2:
                     var buffer = [Character]()

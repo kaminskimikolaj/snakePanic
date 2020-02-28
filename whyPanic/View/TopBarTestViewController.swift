@@ -16,26 +16,49 @@ class TopBarTestViewController: UIViewController {
     
     func scrapLessonScheduleAndSave() {
         let semaphore = DispatchSemaphore(value: 0)
+        var doReturn = false
         DispatchQueue.global(qos: .background).async {
             do { try HttpsScrapper().login(user: "S45_AR4Q5848168", pass: "c9VYgL4R") { result in
-                print(result)
-                semaphore.signal()
-            }}
-            catch let error { print(error) }
-            semaphore.wait()
-
-            do { try HttpsScrapper().scrapLessonsSchedule() { result in
-                switch result {
-                case .success(let data):
-                    print(data)
-                    let stack = CoreDataStack.sharedInstance
-                    stack.saveContext()
-                case .failure(let error):
-                    print("Error: \(error)")
+                let test = try! result.get()
+//                print(test.1)
+                let defaults = UserDefaults.standard
+                var token = defaults.string(forKey: "LastUpdate")
+                var token2: String!
+                if token != test.1 {
+                    if token?.isEmpty ?? true {
+                        token2 = ""
+                    } else {
+                        token2 = token!
+//                        guard token = token else { print("failed2") }
+                    }
+                    print(token2, test.1)
+                    print("found new data, fetching")
+                    defaults.set(test.1, forKey: "LastUpdate")
+                    semaphore.signal()
+                } else {
+                    doReturn = true
                 }
-                semaphore.signal()
             }}
             catch let error { print(error) }
+            if !doReturn {
+                print("test123142")
+                semaphore.wait()
+                do { try HttpsScrapper().scrapLessonsSchedule() { result in
+                    switch result {
+                    case .success(let data):
+    //                    print(data)
+                        let stack = CoreDataStack.sharedInstance
+                        stack.saveContext()
+                    case .failure(let error):
+                        print("Error: \(error)")
+                    }
+                    semaphore.signal()
+                }}
+                catch let error { print(error) }
+            } else {
+                print("exiting")
+                return
+            }
         }
     }
 
@@ -43,7 +66,7 @@ class TopBarTestViewController: UIViewController {
         
         scrapLessonScheduleAndSave()
 //        do { try print(CoreDataStack().lessonsForDay(dayNumber: 2)[0].lessonName)
-//        } catch { print("lkjsdlfja") }
+//        } catch  let error { print(error) }
     
         
         view.backgroundColor = .systemGray

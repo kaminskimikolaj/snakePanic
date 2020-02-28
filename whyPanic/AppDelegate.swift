@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = TabBarController()
         window?.makeKeyAndVisible()
         
+//        let defaults = UserDefaults.standard
+//        let lastUpdate = ["LastUpdate" : ""]
+//        defaults.register(defaults: lastUpdate)
+        
         return true
     }
 }
