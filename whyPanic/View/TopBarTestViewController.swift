@@ -19,34 +19,24 @@ class TopBarTestViewController: UIViewController {
         var doReturn = false
         DispatchQueue.global(qos: .background).async {
             do { try HttpsScrapper().login(user: "S45_AR4Q5848168", pass: "c9VYgL4R") { result in
-                let test = try! result.get()
+                let newDate = try! result.get()
 //                print(test.1)
                 let defaults = UserDefaults.standard
-                var token = defaults.string(forKey: "LastUpdate")
-                var token2: String!
-                if token != test.1 {
-                    if token?.isEmpty ?? true {
-                        token2 = ""
-                    } else {
-                        token2 = token!
-//                        guard token = token else { print("failed2") }
-                    }
-                    print(token2, test.1)
+                let token = defaults.string(forKey: "LastUpdate")
+                if token != newDate.1 {
                     print("found new data, fetching")
-                    defaults.set(test.1, forKey: "LastUpdate")
-                    semaphore.signal()
+                    defaults.set(newDate.1, forKey: "LastUpdate")
                 } else {
                     doReturn = true
                 }
+                semaphore.signal()
             }}
             catch let error { print(error) }
+            semaphore.wait()
             if !doReturn {
-                print("test123142")
-                semaphore.wait()
                 do { try HttpsScrapper().scrapLessonsSchedule() { result in
                     switch result {
                     case .success(let data):
-    //                    print(data)
                         let stack = CoreDataStack.sharedInstance
                         stack.saveContext()
                     case .failure(let error):
@@ -56,16 +46,21 @@ class TopBarTestViewController: UIViewController {
                 }}
                 catch let error { print(error) }
             } else {
-                print("exiting")
+                print("no new data")
                 return
             }
         }
     }
+    
+
 
     override func viewDidLoad() {
-        
+//        CoreDataStack().remove()
         scrapLessonScheduleAndSave()
-//        do { try print(CoreDataStack().lessonsForDay(dayNumber: 2)[0].lessonName)
+        
+//        CoreDataStack().weekForDate(date: Date())
+//        do { let day = try CoreDataStack().lessonsForDay(dayNumber: 2)
+//            print(day)
 //        } catch  let error { print(error) }
     
         

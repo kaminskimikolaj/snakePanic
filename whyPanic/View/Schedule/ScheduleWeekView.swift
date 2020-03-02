@@ -22,29 +22,51 @@ class ScheduleWeekView: UIViewController {
     let rightButton = UIView(frame: .zero)
     
     var lastSelected: Int = 4
-    var selected: Int = 4 {
+    var selectedDay: Int = 4 {
         didSet {
-            NSLayoutConstraint.deactivate([horizontalRowsWidths[lastSelected].featuredWidth, horizontalRowsWidths[self.selected].standardWidth])
-            NSLayoutConstraint.activate([horizontalRowsWidths[self.selected].featuredWidth, horizontalRowsWidths[lastSelected].standardWidth])
-            self.horizontalRows[self.selected].backgroundColor = .systemGray4
+            NSLayoutConstraint.deactivate([horizontalRowsWidths[lastSelected].featuredWidth, horizontalRowsWidths[self.selectedDay].standardWidth])
+            NSLayoutConstraint.activate([horizontalRowsWidths[self.selectedDay].featuredWidth, horizontalRowsWidths[lastSelected].standardWidth])
+            self.horizontalRows[self.selectedDay].backgroundColor = .systemGray4
             self.horizontalRows[lastSelected].backgroundColor = .systemGray6
-            self.horizontalRows[self.selected].layer.cornerRadius = 5
+            self.horizontalRows[self.selectedDay].layer.cornerRadius = 5
             self.horizontalRows[lastSelected].layer.cornerRadius = 0
             UIView.animate(withDuration: 0.25) {
                 self.view.layoutIfNeeded()
             }
-            lastSelected = self.selected
+            lastSelected = self.selectedDay
+        }
+    }
+    
+    var weeks: [ScheduleWeek]? = []
+    var days: [ScheduleDay]? = []
+    var selectedWeek: Int = 0 {
+        didSet {
+            print("selectedWeek didSet")
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let dates = CoreDataStack().avaibleDates()
+//        var date: Date
+//        if dates.count > 0 {
+//            print(dates.count)
+//            date = dates[0]
+//            CoreDataStack().weekForDate(date: date)
+//        }
+        self.weeks = CoreDataStack().fetchWeeks()
+        self.days = weeks!.last?.day?.allObjects as? [ScheduleDay]
+        self.days!.sort(by: { $0.dayNumber < $1.dayNumber })
+//        print(days)
+//        for day in days! {
+//            print(day.dayNumber)
+//        }
         
         setupBarView()
         setupViews()
-        view.backgroundColor = .systemGray6
-        view.addGestureRecognizer(pan)
     }
+    
+    
     
     var beganPanLocation: Int?
     var endedPanLocation: Int?
@@ -58,8 +80,8 @@ class ScheduleWeekView: UIViewController {
                     selectedIndex = i
                 }
             }
-            if location < self.horizontalRows[selected].frame.minX || location > self.horizontalRows[selected].frame.maxX {
-                self.selected = selectedIndex
+            if location < self.horizontalRows[selectedDay].frame.minX || location > self.horizontalRows[selectedDay].frame.maxX {
+                self.selectedDay = selectedIndex
                 beganPanLocation = nil
                 endedPanLocation = nil
             } else {
@@ -78,9 +100,8 @@ class ScheduleWeekView: UIViewController {
     }
     
     @objc func handleDoubleTap(sender: UITapGestureRecognizer) {
-        print("handlingDoubleTap")
-        self.horizontalRows[self.selected].scrollingEnabled = false
-        self.horizontalRows[self.selected].selected = 0
+        self.horizontalRows[self.selectedDay].scrollingEnabled = false
+        self.horizontalRows[self.selectedDay].selected = 0
 //        self.view.removeGestureRecognizer(doubleTap)
         self.view.removeGestureRecognizer(singleTap)
         self.view.addGestureRecognizer(pan)
@@ -88,16 +109,16 @@ class ScheduleWeekView: UIViewController {
     }
     
     @objc func handleSingleTap(sender: UITapGestureRecognizer) {
-        let cellHeight = self.horizontalRows[self.selected].frame.height / 10
-        let location = sender.location(in: self.horizontalRows[selected]).y
+        let cellHeight = self.horizontalRows[self.selectedDay].frame.height / 10
+        let location = sender.location(in: self.horizontalRows[selectedDay]).y
         for i in 0...9 {
-            if self.horizontalRows[selected].cells[i].frame.minY < location && self.horizontalRows[selected].cells[i].frame.maxY > location {
+            if self.horizontalRows[selectedDay].cells[i].frame.minY < location && self.horizontalRows[selectedDay].cells[i].frame.maxY > location {
                 var newOffset = cellHeight * CGFloat(i)
                 if i != 9 {
                     newOffset += 25
                 }
-                self.horizontalRows[self.selected].setContentOffset(CGPoint(x: 0, y: newOffset), animated: true)
-                self.horizontalRows[self.selected].selected = i
+                self.horizontalRows[self.selectedDay].setContentOffset(CGPoint(x: 0, y: newOffset), animated: true)
+                self.horizontalRows[self.selectedDay].selected = i
             }
         }
     }
@@ -118,7 +139,11 @@ class ScheduleWeekView: UIViewController {
             barView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             barView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 1/12)
         ])
-        textView.text = "2020-02-10 - 2020-02-16"
+//        textView.text = "2020-02-10 - 2020-02-16"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd"
+        textView.text = dateFormatter.string(from: weeks![selectedWeek].startDate!)
+//        textView.text = weeks![selectedWeek].startDate.text
         textView.textColor = .systemGray
         textView.adjustsFontSizeToFitWidth = true
         textView.textAlignment = .center
@@ -131,7 +156,7 @@ class ScheduleWeekView: UIViewController {
             textView.centerXAnchor.constraint(equalTo: barView.centerXAnchor)
         ])
         barView.addSubview(rightButton)
-        rightButton.backgroundColor = .systemTeal
+//        rightButton.backgroundColor = .systemTeal
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             rightButton.leftAnchor.constraint(equalTo: textView.rightAnchor),
@@ -142,7 +167,13 @@ class ScheduleWeekView: UIViewController {
     
     func setupViews() {
         for i in 0...4 {
-            let horizontalRow = ScheduleDayView(frame: .zero)
+            
+            let dayData = self.days![i]
+            var lessons = dayData.lesson?.allObjects as? [ScheduleLesson]
+            lessons!.sort(by: { $0.lessonNumber < $1.lessonNumber })
+            
+            let horizontalRow = ScheduleDayView(frame: .zero, lessons: lessons)
+            
             horizontalRow.setupTopAnchorConstraintsForWeekView = horizontalRow.setup.topAnchor.constraint(equalTo: horizontalRow.topAnchor)
             horizontalRow.setupTopAnchorConstraintsForWeekView.isActive = true
             var height = self.view.frame.height - UIApplication.shared.statusBarFrame.height - (self.tabBarController?.tabBar.frame.height)!
@@ -161,7 +192,7 @@ class ScheduleWeekView: UIViewController {
             }
             let widths = HorizontalRowWidth(standardWidth: horizontalRow.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 2/11), featuredWidth: horizontalRow.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 3/11), superWidth: horizontalRow.widthAnchor.constraint(equalTo: view.widthAnchor), zeroWidth: horizontalRow.widthAnchor.constraint(equalToConstant: 0.0))
             
-            if selected == i {
+            if selectedDay == i {
                 widths.featuredWidth.isActive = true
                 horizontalRow.backgroundColor = .systemGray4
                 horizontalRow.layer.cornerRadius = 5
@@ -170,11 +201,13 @@ class ScheduleWeekView: UIViewController {
             }
             horizontalRowsWidths.append(widths)
         }
+        view.backgroundColor = .systemGray6
+        view.addGestureRecognizer(pan)
     }
     
     func featuredWidth() {
         for i in 0...4 {
-            if selected == i {
+            if selectedDay == i {
                 self.horizontalRowsWidths[i].superWidth.isActive = false
                 self.horizontalRowsWidths[i].featuredWidth.isActive = true
                 self.horizontalRows[i].layer.cornerRadius = 5
@@ -191,8 +224,8 @@ class ScheduleWeekView: UIViewController {
                 self.horizontalRowsWidths[i].standardWidth.isActive = true
             }
         }
-        self.horizontalRows[self.selected].setupTopAnchorConstraintsForDayView.isActive = false
-        self.horizontalRows[self.selected].setupTopAnchorConstraintsForWeekView.isActive = true
+        self.horizontalRows[self.selectedDay].setupTopAnchorConstraintsForDayView.isActive = false
+        self.horizontalRows[self.selectedDay].setupTopAnchorConstraintsForWeekView.isActive = true
         UIView.animate(withDuration: 0.25, animations: {
             self.view.layoutIfNeeded()
         }, completion: { _ in
@@ -201,9 +234,9 @@ class ScheduleWeekView: UIViewController {
     }
     
     func superWidth() {
-        self.horizontalRows[self.selected].scrollingEnabled = true
+        self.horizontalRows[self.selectedDay].scrollingEnabled = true
         for i in 0...4 {
-            if selected == i {
+            if selectedDay == i {
                 self.horizontalRowsWidths[i].featuredWidth.isActive = false
                 self.horizontalRowsWidths[i].superWidth.isActive = true
                 self.horizontalRows[i].layer.cornerRadius = 0
@@ -232,8 +265,8 @@ class ScheduleWeekView: UIViewController {
             self.singleTap.cancelsTouchesInView = false
             self.view.addGestureRecognizer(self.singleTap)
             
-            self.horizontalRows[self.selected].setupTopAnchorConstraintsForWeekView.isActive = false
-            self.horizontalRows[self.selected].setupTopAnchorConstraintsForDayView.isActive = true
+            self.horizontalRows[self.selectedDay].setupTopAnchorConstraintsForWeekView.isActive = false
+            self.horizontalRows[self.selectedDay].setupTopAnchorConstraintsForDayView.isActive = true
         })
     }
     
@@ -251,7 +284,7 @@ class ScheduleWeekView: UIViewController {
             let image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))
             let imageView = UIImageView(image: image!)
             imageView.image?.withRenderingMode(.alwaysTemplate)
-            imageView.tintColor = .systemOrange
+            imageView.tintColor = .systemPurple
             imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
             rightButton.addSubview(imageView)
         }

@@ -7,6 +7,7 @@
 //
 
 import SwiftSoup
+import UIKit
 
 class HtmlScrapper {
     
@@ -20,7 +21,7 @@ class HtmlScrapper {
         case teacherName
         case roomName
     }
-    func parseLessonsSchedule(html: String) throws -> ScheduleWeek {
+    func parseLessonsSchedule(html: String, startDate: Date) throws -> ScheduleWeek {
         let context = CoreDataStack.sharedInstance.persistentContainer.viewContext
         func processString(input: [TextNode]) throws -> ScheduleLesson {
             let lesson = ScheduleLesson(context: context)
@@ -105,6 +106,7 @@ class HtmlScrapper {
                 }
             }
             let week = ScheduleWeek(context: context)
+            week.startDate = startDate
             for day in days {
                 week.addToDay(day)
             }

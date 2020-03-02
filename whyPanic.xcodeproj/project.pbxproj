@@ -75,8 +75,8 @@
 				9007B53724098F90000CDC0C /* Assets.xcassets */,
 				9007B53224098F55000CDC0C /* Info.plist */,
 				9007B53524098F7A000CDC0C /* AppDelegate.swift */,
-				9007B54C24098F90000CDC0C /* Scrappers */,
 				9007B53E24098F90000CDC0C /* View */,
+				9007B54C24098F90000CDC0C /* Scrappers */,
 				9007B54624098F90000CDC0C /* CoreData */,
 			);
 			path = whyPanic;
@@ -105,9 +105,9 @@
 		9007B54624098F90000CDC0C /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				9007B54724098F90000CDC0C /* CoreDataStack.swift */,
-				9007B54824098F90000CDC0C /* CoreDataModel.xcdatamodeld */,
 				9007B54A24098F90000CDC0C /* CoreDataStackFetch.swift */,
+				9007B54824098F90000CDC0C /* CoreDataModel.xcdatamodeld */,
+				9007B54724098F90000CDC0C /* CoreDataStack.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";

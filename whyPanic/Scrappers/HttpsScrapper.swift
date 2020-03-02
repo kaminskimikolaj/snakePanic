@@ -84,6 +84,7 @@ class HttpsScrapper {
     func scrapLessonsSchedule(handler: @escaping (Result<ScheduleWeek, NetworkError>) -> Void) throws {
         guard let url = URL(string: "https://nasze.miasto.gdynia.pl/ed_miej/action_plan_zajec.pl") else { throw NetworkError.invalidURL }
         var src: String?
+        var date: Date?
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard error == nil else { handler(.failure(.transmition)); return }
             guard let httpResponse = response as? HTTPURLResponse else { handler(.failure(.responseCastingError)); return }
@@ -92,21 +93,20 @@ class HttpsScrapper {
             do {
                 let doc: Document = try SwiftSoup.parse(String(data: responseData, encoding: .utf8)!)
                 src = try doc.select("iframe").first()?.attr("src")
+                guard let srcSafe = src else { handler(.failure(.htmlParsing)); return }
+                
+                let queryItems = URLComponents(string: srcSafe)?.queryItems
+                let param1 = queryItems?.filter({$0.name == "daty"}).first
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy'-'MM'-'dd"
+                guard let dateString = param1?.value else { return }
+                date = dateFormatter.date(from: dateString)
+                guard let safeDate = date else { return }
+//                print(date)
+                
                 self.semaphore.signal()
-//                let text: String = try doc.body()!.text()
-//                let link: String? = try! doc.select("iframe").first()?.attr("src")
-//                print(link)
-//                print(try! link.attr("src"))
-//                print(text)
             }
             catch { handler(.failure(.dataParsing)) }
-            
-
-//            let doc = TFHpple(htmlData: responseData)
-//            if let elements = doc?.search(withXPathQuery: "//iframe") as? [TFHppleElement] {
-//                for element in elements { src = element.attributes["src"] as? String }
-//                self.semaphore.signal()
-//            } else { handler(.failure(.dataParsing)) }
         }.resume()
         semaphore.wait()
         
@@ -116,7 +116,7 @@ class HttpsScrapper {
             guard let httpResponse = response as? HTTPURLResponse else { handler(.failure(.responseCastingError)); return }
             print(httpResponse.statusCode)
             guard data != nil, let responseString = String(bytes: data!, encoding: .utf8) else { handler(.failure(.dataParsing)); return }
-            do { handler(.success(try HtmlScrapper().parseLessonsSchedule(html: responseString))) }
+            do { handler(.success(try HtmlScrapper().parseLessonsSchedule(html: responseString, startDate: date!))) }
             catch let error { handler(.failure(error as! NetworkError)) }
         }.resume()
     }

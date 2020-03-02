@@ -13,7 +13,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.delegate = self
-        self.tabBar.tintColor = .systemPink
+        self.tabBar.tintColor = .systemPurple
         self.viewControllers = [prototype2, prototype1]
         
         let appearance = tabBar.standardAppearance

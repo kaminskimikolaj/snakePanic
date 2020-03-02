@@ -9,6 +9,9 @@ class ScheduleDayView: UIScrollView {
     var cellsConstraints = [CellHeight]()
     var scrollingEnabled = true
     
+    var lessons: [ScheduleLesson]?
+    
+    
     var lastSelected = 0
     var selected: Int = 0 {
         didSet {
@@ -33,9 +36,14 @@ class ScheduleDayView: UIScrollView {
         let dayFeaturedHeight: NSLayoutConstraint
     }
     
+    convenience init(frame: CGRect, lessons: [ScheduleLesson]?) {
+        self.init(frame: frame)
+        self.lessons = lessons
+        setupView()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -48,8 +56,6 @@ class ScheduleDayView: UIScrollView {
     
     private func setupView() {
         showsVerticalScrollIndicator = false
-//        delegate = self
-//        layer.cornerRadius = 0
         backgroundColor = .systemGray6
         bounces = false
         
@@ -60,7 +66,6 @@ class ScheduleDayView: UIScrollView {
         setup.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         setup.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
-
         
         for i in 0...9 {
             let cell = UIView(frame: .zero)
@@ -81,16 +86,10 @@ class ScheduleDayView: UIScrollView {
             self.cellsConstraints.append(heights)
             cells.append(cell)
 
-//            let contentCell = UIButton(frame: .zero)
             let contentCell = UIView(frame: .zero)
-//            contentCell.addTarget(self, action: #selector(action(sender:)), for: .touchDown)
             contentCell.backgroundColor = .systemGray2
-//            if i % 2 == 0 {
-//                contentCell.backgroundColor = .systemTeal
-//            } else {
-//                contentCell.backgroundColor = .systemGreen
-//            }
             contentCell.layer.cornerRadius = 5.0
+            contentCell.clipsToBounds = true
             cell.addSubview(contentCell)
             contentCell.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
@@ -99,6 +98,21 @@ class ScheduleDayView: UIScrollView {
                 contentCell.centerXAnchor.constraint(equalTo: cell.centerXAnchor),
                 contentCell.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
             ])
+//            contentCell.text = "testtest test"
+//            contentCell.adjustsFontSizeToFitWidth = true
+//            contentCell.numberOfLines =
+//            contentCell.textAlignment = .center
+            if i > 0 && i < 8 {
+                let index = i - 1
+                if lessons?[safe: index] != nil {
+                    if lessons![index].proxy {
+                        contentCell.backgroundColor = .systemPink
+                    }
+                    if lessons![index].released {
+                        contentCell.backgroundColor = .systemGreen
+                    }
+                }
+            }
         }
     }
     
@@ -116,6 +130,12 @@ class ScheduleDayView: UIScrollView {
 //        let cellHeight = self.frame.height / 10
 //        self.setContentOffset(CGPoint(x: 0, y: cellHeight * CGFloat(self.selected)), animated: true)
 //    }
+}
+
+extension Array {
+    subscript (safe index: Int) -> Element? {
+        return indices ~= index ? self[index] : nil
+    }
 }
 
 //THIS PART BELOW WAS INTENDED FEAUTERE BUT IT BREAKS SCROLL VIEW
