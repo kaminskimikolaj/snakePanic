@@ -1,0 +1,20 @@
+#1 Calculate properly dates for schedule top bar
+#2 Add functionallity to http scrapper so then it can detect and download new schedules that would arrive at each refresh
+#3Add labels inside content cells with lessons namees written inside
+#4 Adjust font size and number of rows in lables to fit nicely and be readable
+#5 During animation from ScheduleWeekView to ScheudleDayView topBar text should change from week start-end to name of the day of the week
+#6 Also in same top Bar during animation right button should disappear and left button should change to go back button
+#7 Add ability for user to view start and end time of each lesson by (with messaging apps like style)
+#8 Render right number of cells for each day that equals number of lessons
+DONE #9 Repair cell centering function (broken by adding topBarView) to center cells correctly
+#10 When day focused in ScheduleWeekView it should reveal additional information
+
+ScheudleViewWidget
+ExamsView
+Exams Coloring integration in ScheduleViews
+
+
+
+design and develop marksViewController
+desing and develop downloadNewDataViewController
+

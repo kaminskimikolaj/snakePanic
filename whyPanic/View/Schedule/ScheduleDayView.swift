@@ -102,6 +102,19 @@ class ScheduleDayView: UIScrollView {
 //            contentCell.adjustsFontSizeToFitWidth = true
 //            contentCell.numberOfLines =
 //            contentCell.textAlignment = .center
+            
+            
+            let contentLabel = UILabel(frame: .zero)
+            contentLabel.backgroundColor = .systemBlue
+            contentLabel.contentMode = .scaleAspectFill
+            contentCell.addSubview(contentLabel)
+            contentLabel.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                contentLabel.heightAnchor.constraint(equalTo: contentCell.heightAnchor, multiplier: 9/10),
+                contentLabel.widthAnchor.constraint(equalTo: contentCell.widthAnchor, multiplier: 9/10),
+                contentLabel.centerXAnchor.constraint(equalTo: contentCell.centerXAnchor),
+                contentLabel.centerYAnchor.constraint(equalTo: contentCell.centerYAnchor)
+            ])
             if i > 0 && i < 8 {
                 let index = i - 1
                 if lessons?[safe: index] != nil {
