@@ -9,7 +9,23 @@
 import UIKit
 
 class ScheduleWeekView: UIViewController {
-
+    
+    struct HorizontalRowWidth {
+        let standardWidth: NSLayoutConstraint
+        let featuredWidth: NSLayoutConstraint
+        let superWidth: NSLayoutConstraint
+        let zeroWidth: NSLayoutConstraint
+    }
+    
+    struct FontSzie {
+        let weekStandardSize: UIFont
+        let weekFeaturedSize: UIFont
+        let dayStandardSize: UIFont
+        let dayFeaturedSize: UIFont
+    }
+    
+//    static let fontSize: FontSzie
+    
     var horizontalRows = [ScheduleDayView]()
     var horizontalRowsWidths = [HorizontalRowWidth]()
     
@@ -121,13 +137,6 @@ class ScheduleWeekView: UIViewController {
                 self.horizontalRows[self.selectedDay].selected = i
             }
         }
-    }
-    
-    struct HorizontalRowWidth {
-        let standardWidth: NSLayoutConstraint
-        let featuredWidth: NSLayoutConstraint
-        let superWidth: NSLayoutConstraint
-        let zeroWidth: NSLayoutConstraint
     }
     
     func setupBarView() {
@@ -287,6 +296,9 @@ class ScheduleWeekView: UIViewController {
             imageView.tintColor = .systemPurple
             imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
             rightButton.addSubview(imageView)
+            
+            
+//            print(self.horizontalRows[0].frame)
         }
     }
 }
