@@ -8,20 +8,19 @@
 
 import UIKit
 
+protocol FontSizeDelegate {
+    func setFontSize(size: CGFloat)
+}
+
 class ScheduleWeekView: UIViewController {
+    
+    var fontSizeDelegates = [FontSizeDelegate?]()
     
     struct HorizontalRowWidth {
         let standardWidth: NSLayoutConstraint
         let featuredWidth: NSLayoutConstraint
         let superWidth: NSLayoutConstraint
         let zeroWidth: NSLayoutConstraint
-    }
-    
-    struct FontSzie {
-        let weekStandardSize: UIFont
-        let weekFeaturedSize: UIFont
-        let dayStandardSize: UIFont
-        let dayFeaturedSize: UIFont
     }
     
     var horizontalRows = [ScheduleDayView]()
@@ -61,30 +60,17 @@ class ScheduleWeekView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let dates = CoreDataStack().avaibleDates()
-//        var date: Date
-//        if dates.count > 0 {
-//            print(dates.count)
-//            date = dates[0]
-//            CoreDataStack().weekForDate(date: date)
-//        }
+
         self.weeks = CoreDataStack().fetchWeeks()
         self.days = weeks!.last?.day?.allObjects as? [ScheduleDay]
         self.days!.sort(by: { $0.dayNumber < $1.dayNumber })
-//        print(days)
-//        for day in days! {
-//            print(day.dayNumber)
-//        }
         
         setupBarView()
-        setupViews()
+        setupDayViews()
     }
-    
-    
     
     var beganPanLocation: Int?
     var endedPanLocation: Int?
-    
     @objc func handlePan(sender: UIPanTouchDownGestureRecognizer) {
         if !(self.rightButton.frame.contains(sender.location(in: self.view))) {
             let location = sender.location(in: self.view).x
@@ -172,7 +158,7 @@ class ScheduleWeekView: UIViewController {
         ])
     }
     
-    func setupViews() {
+    func setupDayViews() {
         for i in 0...4 {
             
             let dayData = self.days![i]
@@ -180,6 +166,7 @@ class ScheduleWeekView: UIViewController {
             lessons!.sort(by: { $0.lessonNumber < $1.lessonNumber })
             
             let horizontalRow = ScheduleDayView(frame: .zero, lessons: lessons)
+            self.fontSizeDelegates.append(horizontalRow)
             
             horizontalRow.setupTopAnchorConstraintsForWeekView = horizontalRow.setup.topAnchor.constraint(equalTo: horizontalRow.topAnchor)
             horizontalRow.setupTopAnchorConstraintsForWeekView.isActive = true
@@ -277,6 +264,66 @@ class ScheduleWeekView: UIViewController {
         })
     }
     
+    private func calculateNumberOfLines(string: String) -> [String] {
+        var output = [String]()
+        var buffer = ""
+        for char in string {
+            if char == " " {
+                output.append(buffer)
+                buffer = ""
+            } else {
+                buffer += char.description
+            }
+        }
+        output.append(buffer)
+        return output
+    }
+    
+    private func calculateMaxFontSize(lessons: [ScheduleLesson]) {
+        var loop = true
+        while loop {
+            let width = self.view.frame.width * 2/11
+            let formatted = calculateNumberOfLines(string: lessons[0].lessonName!)[0]
+            let fontSize = self.maxFontSize
+            let font = UIFont.systemFont(ofSize: fontSize)
+            let currentSize = (formatted as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+            if currentSize.width < width {
+                self.maxFontSize += 1
+            }
+            else {
+                loop = false
+            }
+        }
+
+//        print(width)
+//        var list = [CGFloat]()
+//        var min = CGFloat(20)
+//        var fontSize = CGFloat()
+//        for lesson in lessons {
+//            let formatted = calculateNumberOfLines(string: lesson.lessonName!)
+//            for line in formatted {
+//                fontSize = CGFloat(1)
+//                var loop = true
+//                while loop {
+//                    let font = UIFont.systemFont(ofSize: fontSize)
+//                    let currentSize = (line as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+//                    if currentSize.width < width {
+//                        fontSize += 1
+//                    } else {
+//                        loop = false
+//                        fontSize -= 1
+//                        list.append(fontSize)
+//                        if min > fontSize {
+//                            min = fontSize
+//                        }
+//                    }
+//                }
+//            }
+//        }
+    }
+    
+    var maxFontSize = CGFloat(0)
+    
     var doonce = true
     override func viewDidLayoutSubviews() {
 
@@ -295,11 +342,48 @@ class ScheduleWeekView: UIViewController {
             imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
             rightButton.addSubview(imageView)
             
-//            print(self.horizontalRows[0].frame)
             
-            for cell in self.horizontalRows {
-                print(cell.calculateFontSize())
+            var longestString = ""
+            for day in self.days! {
+                var lessons = day.lesson?.allObjects as? [ScheduleLesson]
+                lessons!.sort(by: { $0.lessonNumber < $1.lessonNumber })
+                for lesson in lessons! {
+                    let strings = calculateNumberOfLines(string: lesson.lessonName!)
+                    for string in strings {
+                        if string.count > longestString.count {
+                            longestString = string
+                        }
+                    }
+                }
             }
+            print(longestString)
+            var loop = true
+            while loop {
+                let width = self.view.frame.width * 2/11 * 9/10
+//                print(width)
+                let fontSize = self.maxFontSize
+                let font = UIFont.systemFont(ofSize: fontSize)
+                let currentSize = (longestString as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+//                print(currentSize)
+                if currentSize.width < width {
+                    self.maxFontSize += 1
+                }
+                else {
+                    loop = false
+                    self.maxFontSize -= 1
+                }
+            }
+//            print(maxFontSize)
+//            fontSizeDelegate.setFontSize(size: maxFontSize)
+            for delegate in self.fontSizeDelegates {
+                delegate!.setFontSize(size: maxFontSize)
+            }
+            
+//            for row in self.horizontalRows {
+//                for cell in row.cells {
+//                    print(cell)
+//                }
+//            }
         }
     }
 }

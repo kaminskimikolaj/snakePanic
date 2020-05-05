@@ -38,6 +38,7 @@ class ScheduleDayView: UIScrollView {
     convenience init(frame: CGRect, lessons: [ScheduleLesson]?) {
         self.init(frame: frame)
         self.lessons = lessons
+        
         setupView()
     }
     
@@ -47,10 +48,6 @@ class ScheduleDayView: UIScrollView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    @objc func action(sender: UIButton!) {
-//        print("action")
     }
     
     private func setupView() {
@@ -100,7 +97,7 @@ class ScheduleDayView: UIScrollView {
                 contentCell.centerYAnchor.constraint(equalTo: cell.centerYAnchor)
             ])
             if i < lessons!.count {
-                contentCell.font = contentCell.font.withSize(2)
+//                contentCell.font = contentCell.font.withSize(2)
                 let number = calculateNumberOfLines(string: lessons![i].lessonName!).count
                 contentCell.numberOfLines = number
                 contentCell.text = lessons![i].lessonName!
@@ -108,21 +105,6 @@ class ScheduleDayView: UIScrollView {
             }
         }
     }
-    
-//    func scrollToSelected() {
-//        print(self.frame.height)
-//        var offset: CGFloat = 0
-//        for i in 0...self.selected {
-//            offset += self.cells[i].frame.height
-//        }
-//        print(offset)
-//        offset -= self.frame.height
-//        print(offset)
-//        self.setContentOffset(CGPoint(x: 0, y: offset), animated: false)
-//        print(contentOffset)
-//        let cellHeight = self.frame.height / 10
-//        self.setContentOffset(CGPoint(x: 0, y: cellHeight * CGFloat(self.selected)), animated: true)
-//    }
     
     private func calculateNumberOfLines(string: String) -> [String] {
         var output = [String]()
@@ -138,51 +120,20 @@ class ScheduleDayView: UIScrollView {
         output.append(buffer)
         return output
     }
-    
-    func calculateFontSize() -> CGFloat {
-        var list = [CGFloat]()
-        var min = CGFloat(20)
-        var fontSize = CGFloat()
-        for lesson in self.lessons! {
-            let formatted = calculateNumberOfLines(string: lesson.lessonName!)
-            for line in formatted {
-                fontSize = CGFloat(1)
-                var loop = true
-                while loop {
-                    let font = UIFont.systemFont(ofSize: fontSize)
-                    let currentSize = (line as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
-                    if currentSize.width < self.cells[0].frame.width {
-                        fontSize += 1
-                    } else {
-                        loop = false
-                        fontSize -= 1
-                        list.append(fontSize)
-                        if min > fontSize {
-                            min = fontSize
-                        }
-//                        if ScheduleWeekView.fontSize > fontSize {
-//                            ScheduleWeekView.fontSize = fontSize
-//                        }
-                    }
-                }
+
+}
+
+extension ScheduleDayView: FontSizeDelegate {
+    func setFontSize(size: CGFloat) {
+//        print("setting font size to \(size)")
+        for cell in cells {
+            for subview in cell.subviews {
+                let label = subview as! UILabel
+                label.font = label.font.withSize(size)
             }
         }
-//        print(list, min)
-//        if ScheduleWeekView.fontSize > min {
-//            ScheduleWeekView.fontSize =  min
-//        }
-//        ScheduleWeekView.dayCounter += 1
-//        print(ScheduleWeekView.dayCounter)
-        return min
     }
 }
-
-extension Array {
-    subscript (safe index: Int) -> Element? {
-        return indices ~= index ? self[index] : nil
-    }
-}
-
 //THIS PART BELOW WAS INTENDED FEAUTERE BUT IT BREAKS SCROLL VIEW
 
 //extension ScheduleDayView: UIScrollViewDelegate {
