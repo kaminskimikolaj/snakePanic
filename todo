@@ -18,3 +18,11 @@ Exams Coloring integration in ScheduleViews
 design and develop marksViewController
 desing and develop downloadNewDataViewController
 
+
+problems and solutions:
+1.
+	problem: set font size that would fit every cell
+	WRONG solution 1: calculate minial font size inside every dayView, then pass that value back to weekView and set font sizes in every cell from weekView
+	solution 2: to calculate maximum font size that would fit in every cell, only strings are required, which are known before even creatig cell.	
+			step 1: calculate maximum font size for every cell using strings
+			step 2: pass that value to each 

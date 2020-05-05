@@ -24,8 +24,6 @@ class ScheduleWeekView: UIViewController {
         let dayFeaturedSize: UIFont
     }
     
-//    static let fontSize: FontSzie
-    
     var horizontalRows = [ScheduleDayView]()
     var horizontalRowsWidths = [HorizontalRowWidth]()
     
@@ -297,8 +295,11 @@ class ScheduleWeekView: UIViewController {
             imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
             rightButton.addSubview(imageView)
             
-            
 //            print(self.horizontalRows[0].frame)
+            
+            for cell in self.horizontalRows {
+                print(cell.calculateFontSize())
+            }
         }
     }
 }
