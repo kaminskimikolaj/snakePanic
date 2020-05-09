@@ -68,7 +68,7 @@ class ScheduleWeekView: UIViewController {
         self.days = weeks!.last?.day?.allObjects as? [ScheduleDay]
         self.days!.sort(by: { $0.dayNumber < $1.dayNumber })
         
-        setupBarView()
+        setupBarView()
         setupDayViews()
     }
     
@@ -309,6 +309,10 @@ class ScheduleWeekView: UIViewController {
     }
     
     //MARK: Calculate Font Sizes
+    var maxFontSizes: ScheduleDayViewFontSize?
+    var biggestString = ""
+    var biggestStringSequence = ""
+    
     private func calculateNumberOfLines(string: String) -> [String] {
         var output = [String]()
         var buffer = ""
@@ -324,10 +328,6 @@ class ScheduleWeekView: UIViewController {
         return output
     }
     
-    var maxFontSizes: ScheduleDayViewFontSize?
-
-    var biggestString = ""
-    var biggestStringSequence = ""
     private func calculateFontSizes() {
         
         var biggestSize = CGSize()
@@ -357,6 +357,7 @@ class ScheduleWeekView: UIViewController {
             zeroFontSize: CGFloat(0)
         )
     }
+    
     private func calculateMaxFontSize(forWidth width: CGFloat, forString string: String) -> CGFloat {
         var maxFontSize = CGFloat(0)
         var loop = true
