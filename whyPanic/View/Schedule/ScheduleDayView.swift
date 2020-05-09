@@ -2,6 +2,41 @@ import UIKit
 
 class ScheduleDayView: UIScrollView {
     
+    enum ScheduleDayViewState {
+        case featuredView
+        case standardView
+        case zeroView
+        case superView
+    }
+    
+    var fontSizes: ScheduleDayViewFontSize?
+    
+    var state: ScheduleDayViewState? {
+        didSet {
+            setFontSizes()
+        }
+    }
+    private func setFontSizes() {
+        if self.fontSizes != nil {
+            switch (self.state) {
+                case .featuredView: setFontSizeTo(fontSize: fontSizes!.featuredFontSize)
+                case .standardView: setFontSizeTo(fontSize: fontSizes!.standardFontSize)
+                case .superView: setFontSizeTo(fontSize: fontSizes!.superFontSize)
+                case .zeroView: setFontSizeTo(fontSize: fontSizes!.zeroFontSize)
+                default: print("ScheduleDayView.state not set yet")
+            }
+        }
+    }
+    
+    private func setFontSizeTo(fontSize: CGFloat) {
+        for cell in cells {
+            for subview in cell.subviews {
+                let label = subview as! UILabel
+                label.font = label.font.withSize(fontSize)
+            }
+        }
+    }
+    
     var cells = [UIView]()
     var setup = UIView(frame: .zero)
     var setupTopAnchorConstraintsForWeekView = NSLayoutConstraint()
@@ -65,7 +100,7 @@ class ScheduleDayView: UIScrollView {
         
         for i in 0...9 {
             let cell = UIView(frame: .zero)
-            addSubview(cell)
+            addSubview(cell) 
             cell.translatesAutoresizingMaskIntoConstraints = false
             cell.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
             if i == 0 {
@@ -87,7 +122,6 @@ class ScheduleDayView: UIScrollView {
             contentCell.layer.cornerRadius = 5.0
             contentCell.clipsToBounds = true
             contentCell.contentMode = .scaleToFill
-            contentCell.accessibilityIdentifier = "contentCell"
             cell.addSubview(contentCell)
             contentCell.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
@@ -106,7 +140,7 @@ class ScheduleDayView: UIScrollView {
         }
     }
     
-    private func calculateNumberOfLines(string: String) -> [String] {
+    func calculateNumberOfLines(string: String) -> [String] {
         var output = [String]()
         var buffer = ""
         for char in string {
@@ -124,14 +158,9 @@ class ScheduleDayView: UIScrollView {
 }
 
 extension ScheduleDayView: FontSizeDelegate {
-    func setFontSize(size: CGFloat) {
-//        print("setting font size to \(size)")
-        for cell in cells {
-            for subview in cell.subviews {
-                let label = subview as! UILabel
-                label.font = label.font.withSize(size)
-            }
-        }
+    func writeFontSizes(sizes: ScheduleDayViewFontSize) {
+        self.fontSizes = sizes
+        setFontSizes()
     }
 }
 //THIS PART BELOW WAS INTENDED FEAUTERE BUT IT BREAKS SCROLL VIEW
