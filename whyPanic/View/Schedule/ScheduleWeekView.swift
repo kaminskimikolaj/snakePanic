@@ -25,7 +25,7 @@ class ScheduleWeekView: UIViewController {
     
     var horizontalRows = [ScheduleDayView]()
     var horizontalRowsWidths = [HorizontalRowWidth]()
-    
+        
     lazy var doubleTap = UIShortTapGestureRecognizer(target: self, action: #selector(self.handleDoubleTap(sender:)))
     lazy var pan = UIPanTouchDownGestureRecognizer(target: self, action: #selector(handlePan(sender:)))
     lazy var singleTap = UITapGestureRecognizer(target: self, action: #selector(handleSingleTap(sender:)))
@@ -279,133 +279,69 @@ class ScheduleWeekView: UIViewController {
         return output
     }
     
-    private func calculateMaxFontSize(lessons: [ScheduleLesson]) {
+    var maxFontSize = CGFloat(0)
+    private func setMaxFontSize() {
+        var biggestString = ""
+        var biggestSize = CGSize()
+        for day in self.days! {
+            var lessons = day.lesson?.allObjects as? [ScheduleLesson]
+            lessons!.sort(by: { $0.lessonNumber < $1.lessonNumber })
+            for lesson in lessons! {
+                let strings = calculateNumberOfLines(string: lesson.lessonName!)
+                for string in strings {
+                    let font = UIFont.systemFont(ofSize: CGFloat(1))
+                    let currentSize = (string as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+                    if currentSize.width > biggestSize.width {
+                        biggestSize = currentSize
+                        biggestString = string
+                    }
+                }
+            }
+            
+        }
+        
         var loop = true
         while loop {
-            let width = self.view.frame.width * 2/11
-            let formatted = calculateNumberOfLines(string: lessons[0].lessonName!)[0]
+            let width = self.view.frame.width * 2/11 * 9/10
             let fontSize = self.maxFontSize
             let font = UIFont.systemFont(ofSize: fontSize)
-            let currentSize = (formatted as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
+            let currentSize = (biggestString as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
             if currentSize.width < width {
-                self.maxFontSize += 1
+                self.maxFontSize += 0.5
             }
             else {
                 loop = false
+                self.maxFontSize -= 0.5
             }
         }
-
-//        print(width)
-//        var list = [CGFloat]()
-//        var min = CGFloat(20)
-//        var fontSize = CGFloat()
-//        for lesson in lessons {
-//            let formatted = calculateNumberOfLines(string: lesson.lessonName!)
-//            for line in formatted {
-//                fontSize = CGFloat(1)
-//                var loop = true
-//                while loop {
-//                    let font = UIFont.systemFont(ofSize: fontSize)
-//                    let currentSize = (line as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
-//                    if currentSize.width < width {
-//                        fontSize += 1
-//                    } else {
-//                        loop = false
-//                        fontSize -= 1
-//                        list.append(fontSize)
-//                        if min > fontSize {
-//                            min = fontSize
-//                        }
-//                    }
-//                }
-//            }
-//        }
     }
     
-    var maxFontSize = CGFloat(0)
+    private func setupTopBar() {
+        let height = view.safeAreaLayoutGuide.layoutFrame.height / 12
+        let width = view.frame.width / 10
+
+        let safeHeight = height * 3/5
+        let safeWidth = width * 3/5
+        
+        let image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))
+        let imageView = UIImageView(image: image!)
+        imageView.image?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = .systemPurple
+        imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
+        rightButton.addSubview(imageView)
+    }
     
     var doonce = true
     override func viewDidLayoutSubviews() {
 
         if doonce {
             doonce = false
-            let height = view.safeAreaLayoutGuide.layoutFrame.height / 12
-            let width = view.frame.width / 10
+            self.setupTopBar()
+            
+            self.setMaxFontSize()
 
-            let safeHeight = height * 3/5
-            let safeWidth = width * 3/5
-            
-            let image = UIImage(systemName: "chevron.right", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .bold))
-            let imageView = UIImageView(image: image!)
-            imageView.image?.withRenderingMode(.alwaysTemplate)
-            imageView.tintColor = .systemPurple
-            imageView.frame = CGRect(x: width/5, y: height/5, width: safeWidth, height: safeHeight)
-            rightButton.addSubview(imageView)
-            
-            
-            var longestString = ""
-            for day in self.days! {
-                var lessons = day.lesson?.allObjects as? [ScheduleLesson]
-                lessons!.sort(by: { $0.lessonNumber < $1.lessonNumber })
-                for lesson in lessons! {
-                    let strings = calculateNumberOfLines(string: lesson.lessonName!)
-                    for string in strings {
-                        if string.count > longestString.count {
-                            longestString = string
-                        }
-                    }
-                }
-            }
-            print(longestString)
-            var loop = true
-            while loop {
-                let width = self.view.frame.width * 2/11 * 9/10
-//                print(width)
-                let fontSize = self.maxFontSize
-                let font = UIFont.systemFont(ofSize: fontSize)
-                let currentSize = (longestString as NSString).size(withAttributes: [NSAttributedString.Key.font: font])
-//                print(currentSize)
-                if currentSize.width < width {
-                    self.maxFontSize += 1
-                }
-                else {
-                    loop = false
-                    self.maxFontSize -= 1
-                }
-            }
-//            print(maxFontSize)
-//            fontSizeDelegate.setFontSize(size: maxFontSize)
             for delegate in self.fontSizeDelegates {
                 delegate!.setFontSize(size: maxFontSize)
-            }
-            
-//            for row in self.horizontalRows {
-//                for cell in row.cells {
-//                    print(cell)
-//                }
-//            }
-        }
-    }
-}
-
-class UIPanTouchDownGestureRecognizer: UIPanGestureRecognizer {
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        if (self.state == UIGestureRecognizer.State.began) { return }
-        super.touchesBegan(touches, with: event)
-        self.state = UIGestureRecognizer.State.began
-    }
-}
-
-class UIShortTapGestureRecognizer: UITapGestureRecognizer {
-    let tapMaxDelay: Double = 0.3
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
-        super.touchesBegan(touches, with: event)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + tapMaxDelay) { [weak self] in
-            if self?.state != UIGestureRecognizer.State.recognized {
-                self?.state = UIGestureRecognizer.State.failed
             }
         }
     }

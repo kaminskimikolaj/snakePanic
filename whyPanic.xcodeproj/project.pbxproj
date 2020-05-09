@@ -21,6 +21,7 @@
 		9007B56924098F91000CDC0C /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9007B54F24098F90000CDC0C /* Crypto.swift */; };
 		9007B5722409916F000CDC0C /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 9007B5712409916F000CDC0C /* SwiftSoup */; };
 		9007B57324099262000CDC0C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9007B53724098F90000CDC0C /* Assets.xcassets */; };
+		90FED1A82466C3820054A5C2 /* Gestures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FED1A72466C3820054A5C2 /* Gestures.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		9007B54D24098F90000CDC0C /* HttpsScrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpsScrapper.swift; sourceTree = "<group>"; };
 		9007B54E24098F90000CDC0C /* HtmlScrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlScrapper.swift; sourceTree = "<group>"; };
 		9007B54F24098F90000CDC0C /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
+		90FED1A72466C3820054A5C2 /* Gestures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gestures.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 				9007B54224098F90000CDC0C /* YellowViewController.swift */,
 				9007B54324098F90000CDC0C /* TopBarTestViewController.swift */,
 				9007B54424098F90000CDC0C /* TabBarController.swift */,
+				90FED1A72466C3820054A5C2 /* Gestures.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				9007B56124098F91000CDC0C /* TabBarController.swift in Sources */,
 				9007B53624098F7A000CDC0C /* AppDelegate.swift in Sources */,
 				9007B56924098F91000CDC0C /* Crypto.swift in Sources */,
+				90FED1A82466C3820054A5C2 /* Gestures.swift in Sources */,
 				9007B56724098F91000CDC0C /* HttpsScrapper.swift in Sources */,
 				9007B56324098F91000CDC0C /* CoreDataStack.swift in Sources */,
 				9007B55D24098F91000CDC0C /* ScheduleWeekView.swift in Sources */,
